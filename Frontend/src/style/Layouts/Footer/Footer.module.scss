@@ -1,0 +1,26 @@
+@import "../../global/index.scss";
+
+.footer {
+  @include flexCenter;
+  background-color: $primary-color;
+  height: 50px;
+  margin-top: 50px;
+}
+
+.navLinksList {
+  @include flexCenter;
+  column-gap: 45px;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.navLink a {
+  color: $white-text-color;
+}
+
+@media (max-width: 400px) {
+  .navLinksList {
+    column-gap: 30px;
+    font-size: 12px;
+  }
+}

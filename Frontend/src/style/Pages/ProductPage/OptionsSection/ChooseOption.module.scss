@@ -1,0 +1,23 @@
+@import "../../../global/index.scss";
+
+.container {
+  @include flexCenter(column);
+  background-color: $secondary-color;
+  border-radius: 15px;
+  padding: 50px 0;
+  row-gap: 60px;
+}
+
+.chooseOption {
+  @include flexCenter;
+  column-gap: 15px;
+}
+
+.chooseOption h1 {
+  font-size: 20px;
+}
+
+.chooseOption .icon {
+  font-size: 25px;
+  transform: rotate(90deg);
+}

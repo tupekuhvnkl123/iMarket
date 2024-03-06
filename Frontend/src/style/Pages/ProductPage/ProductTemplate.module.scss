@@ -1,0 +1,16 @@
+@import "../../global/index.scss";
+
+.main {
+  @include appWidthContainer;
+  padding-top: 170px;
+  row-gap: 70px;
+}
+
+.buyButtonContainer {
+  @include flexCenter;
+}
+
+.buyButtonContainer button {
+  @include button("dark");
+  padding: 6px 20px;
+}

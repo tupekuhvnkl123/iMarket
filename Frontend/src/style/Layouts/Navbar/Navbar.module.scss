@@ -1,0 +1,47 @@
+@import "../../global/index.scss";
+
+.navbar {
+  @include flexCenter;
+  background-color: $primary-color;
+  height: 50px;
+  color: $white-text-color;
+  column-gap: 100px;
+  padding: 0 10px;
+  transition: all 1s;
+  z-index: 10000;
+}
+
+.blackNavbar {
+  background-color: black;
+}
+
+.logo {
+  height: 17px;
+}
+
+.navLinksList {
+  @include flexCenter;
+  column-gap: 45px;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.navLink a {
+  color: $white-text-color;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    column-gap: 50px;
+  }
+}
+
+@media (max-width: $phone-media-break) {
+  .navbar {
+    justify-content: space-between;
+    column-gap: 0px;
+  }
+  .navLinksList {
+    display: none;
+  }
+}

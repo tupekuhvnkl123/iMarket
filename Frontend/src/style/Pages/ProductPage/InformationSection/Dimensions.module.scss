@@ -1,0 +1,27 @@
+@import "../../../global/index.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-self: center;
+  row-gap: 50px;
+}
+
+.dimensionItem {
+  min-width: 100px;
+}
+
+@media (max-width: $phone-media-break) {
+  .container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .dimensionItem {
+    flex-basis: 50%;
+  }
+  .dimensionItem p {
+    font-size: clamp(12px, 2.5vw, 16px);
+  }
+}

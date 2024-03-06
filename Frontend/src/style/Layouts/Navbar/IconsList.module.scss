@@ -1,0 +1,42 @@
+@import "../../global/index.scss";
+
+.iconsList {
+  @include flexCenter;
+  column-gap: 2px;
+}
+
+.iconsList li {
+  @include flexCenter;
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.iconsList li:hover {
+  background-color: #404040;
+}
+
+.iconsList .burger {
+  display: none;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+@media (max-width: $phone-media-break) {
+  .iconsList {
+    column-gap: 7px;
+  }
+  .iconsList .favorite {
+    display: none;
+  }
+  .iconsList .cart {
+    display: none;
+  }
+  .iconsList .burger {
+    display: flex;
+  }
+}

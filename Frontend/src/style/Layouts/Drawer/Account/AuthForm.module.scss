@@ -1,0 +1,56 @@
+@import "../../../global/index.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 40px;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  border: solid 0.1px rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  min-height: 45px;
+  max-width: 480px;
+  padding: 5px 10px;
+
+  input {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    margin-left: 10px;
+    font-size: 17px;
+    color: $secondary-color;
+    font-weight: 300;
+    outline: none;
+  }
+}
+
+.iconContainer {
+  @include flexCenter;
+
+  .icon {
+    font-size: 20px;
+    color: $secondary-color;
+  }
+}
+
+.authButton {
+  @include button;
+  max-width: 150px;
+}
+
+.errorMessage {
+  color: rgb(255, 80, 80);
+  font-weight: 300;
+  margin-top: -10px;
+}

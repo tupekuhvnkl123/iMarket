@@ -1,0 +1,44 @@
+@import "../../../global/index.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 40px;
+}
+
+.selectAuth {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+}
+
+.selectAuth hr {
+  height: 18px;
+}
+
+.selectAuth p {
+  color: rgba($secondary-color, 0.55);
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.selectAuth .active,
+.selectAuth p:hover {
+  color: $white-text-color;
+  font-weight: 400;
+}
+
+.demoAccount {
+  color: $backgroundColor;
+}
+
+.demoAccount b {
+  font-weight: 450;
+}
+
+.demoAccount p {
+  font-weight: 300;
+}

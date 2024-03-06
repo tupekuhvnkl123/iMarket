@@ -1,0 +1,24 @@
+@import "../../../global/index.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.searchIcon {
+  font-size: 30px;
+  color: $secondary-color;
+}
+
+.input {
+  border: none;
+  font-size: 23px;
+  color: $white-text-color;
+  background-color: transparent;
+  width: 100%;
+}
+
+.input:focus {
+  outline: none;
+}

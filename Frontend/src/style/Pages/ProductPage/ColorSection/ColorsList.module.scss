@@ -1,0 +1,57 @@
+@import "../../../global/index.scss";
+
+.colorsList {
+  @include flexCenter;
+  background-color: rgba($secondary-color, 0.4);
+  border-radius: 10px;
+  padding: 8px 20px 3px 20px;
+  min-width: 220px;
+  column-gap: 20px;
+}
+
+.colorItem {
+  @include flexCenter(column);
+  row-gap: 7px;
+}
+
+.colorItem div {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.colorItem p {
+  font-size: 15px;
+}
+
+@media (max-width: 1150px) {
+  .colorsList {
+    min-width: 200px;
+    column-gap: 15px;
+  }
+  .colorItem {
+    row-gap: 5px;
+  }
+  .colorItem div {
+    height: 13px;
+    width: 13px;
+  }
+  .colorItem p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: $phone-media-break) {
+  .colorsList {
+    max-width: 70vw;
+    column-gap: clamp(5px, 2.5vw, 15px);
+  }
+  .colorItem div {
+    height: clamp(10px, 2vw, 13px);
+    width: clamp(10px, 2vw, 13px);
+  }
+  .colorItem p {
+    font-size: clamp(11px, 2.4vw, 14px);
+  }
+}

@@ -1,0 +1,86 @@
+@import "../../global/index.scss";
+
+.container {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  height: calc(100vh - 50px);
+  top: 50px;
+  left: 0;
+  width: 100vw;
+  grid-template-rows: 450px 1fr;
+  animation: slideOutAnimation 0.5s ease-in-out;
+}
+
+.open {
+  display: grid;
+  animation: slideInAnimation 0.5s ease-in-out;
+}
+
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.drawer {
+  background-color: $primary-color;
+}
+
+.content {
+  display: flex;
+  margin: 0 auto;
+  padding-top: 50px;
+  max-width: 700px;
+}
+
+.blur {
+  backdrop-filter: blur(2px);
+  animation: fadeInAnimation 0.5s ease-in-out 0.3s;
+}
+
+@media (max-width: 900px) {
+  .content {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: $phone-media-break) {
+  .container {
+    grid-template-rows: 100vh 1fr;
+  }
+  .content {
+    @include appWidthContainer;
+  }
+}
+
+@keyframes slideInAnimation {
+  from {
+    transform: translateY(-300px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutAnimation {
+  from {
+    transform: translateY(0px);
+    opacity: 1;
+    display: grid;
+  }
+  to {
+    transform: translateY(-300px);
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

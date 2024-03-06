@@ -1,0 +1,77 @@
+@mixin flexCenter($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $secondary-color;
+  border-radius: 15px;
+  height: 100%;
+  width: 100%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+@mixin appWidthContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 200px;
+  padding-left: 200px;
+
+  @media (max-width: 1650px) {
+    padding-right: 9vw;
+    padding-left: 9vw;
+  }
+
+  @media (max-width: 1300px) {
+    padding-right: clamp(30px, 5vw, 200px);
+    padding-left: clamp(30px, 5vw, 200px);
+  }
+}
+
+@mixin imageCover {
+  object-position: center;
+  object-fit: cover;
+}
+
+@mixin backgroundImage($url: "") {
+  @if $url != "" {
+    background-image: url($url);
+  }
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@mixin button($style: "light") {
+  @if $style == "dark" {
+    color: white;
+    background-color: $primary-color;
+    border: 1px solid $backgroundColor;
+  } @else {
+    color: black;
+    background-color: $backgroundColor;
+    border: none;
+  }
+
+  font-weight: 450;
+  min-height: 32px;
+  min-width: 90px;
+  padding: 6px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

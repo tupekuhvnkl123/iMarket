@@ -1,0 +1,82 @@
+@import "../../global/index.scss";
+
+.item {
+  @include card;
+  padding: 50px 40px 30px 40px;
+  row-gap: 15px;
+  position: relative;
+}
+
+.favoriteIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: $primary-color;
+  font-size: 22px;
+}
+
+.image {
+  @include imageCover;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.model {
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.colors {
+  @include flexCenter;
+  column-gap: 6px;
+
+  div {
+    height: 17px;
+    width: 17px;
+    border-radius: 50%;
+  }
+}
+
+.capacity {
+  @include flexCenter;
+  column-gap: 15px;
+
+  p {
+    font-weight: 450;
+    font-size: 15px;
+  }
+}
+
+.price {
+  font-weight: 450;
+  font-size: 15px;
+}
+
+.buyNowBtn {
+  @include button("dark");
+}
+
+@media (max-width: 1055px) {
+  .model {
+    font-size: 15px;
+  }
+
+  .colors div {
+    height: clamp(10px, 1.5vw, 15px);
+    width: clamp(10px, 1.5vw, 15px);
+  }
+
+  .capacity p {
+    font-size: 14px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+}

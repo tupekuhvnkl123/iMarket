@@ -1,0 +1,40 @@
+@import "../global/index.scss";
+
+.card {
+  @include card;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+.card:hover {
+  .image {
+    transform: scale(1.1);
+  }
+  .title {
+    transform: scale(1.2);
+  }
+}
+
+.title {
+  @include flexCenter;
+  height: 20%;
+  font-weight: 800;
+  transition: all 0.3s ease-in-out;
+}
+
+.image {
+  @include imageCover;
+  max-width: 100%;
+  height: 80%;
+  transition: all 0.3s ease-in-out;
+
+  &.fullHeight {
+    height: 100%;
+  }
+}
+
+@media (max-width: 1350px) {
+  .title {
+    font-size: clamp(10px, 1.5vw, 14px);
+  }
+}

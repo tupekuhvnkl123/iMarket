@@ -1,0 +1,124 @@
+@import "../../../global/index.scss";
+
+.favoriteItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 50px;
+  background-color: rgba($secondary-color, 0.05);
+  border-radius: 10px;
+  max-height: 130px;
+  min-height: 130px;
+}
+.model {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  column-gap: 25px;
+  img {
+    object-position: center;
+    object-fit: contain;
+    max-height: 100%;
+    height: auto;
+    width: 100px;
+  }
+  p {
+    color: $white-text-color;
+    font-size: 20px;
+    font-weight: 450;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  height: 60%;
+  column-gap: 20px;
+  hr {
+    height: 100%;
+    border: none;
+    background-color: rgba($secondary-color, 0.5);
+    width: 1.5px;
+  }
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+
+  .exploreBtn {
+    @include button("dark");
+    border: none;
+    min-height: 25px;
+  }
+  .removeBtn {
+    @include button("light");
+    min-height: 25px;
+    background-color: $error-color;
+    color: $secondary-color;
+  }
+}
+
+@media (max-width: 900px) {
+  .favoriteItem {
+    padding: 10px 30px;
+  }
+}
+
+@media (max-width: $phone-media-break) {
+  .favoriteItem {
+    max-height: 110px;
+    min-height: 110px;
+  }
+  .model {
+    column-gap: clamp(5px, 2.5vw, 20px);
+
+    p {
+      font-size: 15px;
+    }
+  }
+  .actions {
+    height: 70%;
+    hr {
+      display: none;
+    }
+  }
+  .buttonsContainer {
+    .exploreBtn,
+    .removeBtn {
+      font-size: 12px;
+      min-height: 20px;
+      min-width: 75px;
+      padding: 6px 10px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .favoriteItem {
+    padding: 10px 10px;
+  }
+
+  .model {
+    img {
+      width: 75px;
+    }
+    p {
+      font-size: 13px;
+    }
+  }
+  .actions {
+    height: 65%;
+  }
+  .buttonsContainer {
+    .exploreBtn,
+    .removeBtn {
+      min-width: 60px;
+      padding: 5px 5px;
+    }
+  }
+}

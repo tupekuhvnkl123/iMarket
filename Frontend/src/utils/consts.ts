@@ -4,6 +4,8 @@ import {
 } from "../components/Pages/ProductPage/ProductPage.types";
 import { ProductsPageStaticDataType } from "../components/Pages/ProductsPage/ProductsPage.types";
 import { HomeGalleryDataType } from "../components/Home/Home.types";
+import { FavoriteProductType } from "../components/Layouts/Drawer/Favorites/Favorites.types";
+import { CartProductType } from "../components/Layouts/Drawer/Cart/Cart.types";
 
 export const appRoutes = {
   Home: "home",
@@ -139,6 +141,104 @@ export const airPodsMaxProductPageImages: ProductPageImagesType = {
     "https://res.cloudinary.com/dnxqlkwvr/image/upload/v1707824080/iMarket/ProductPages/%E2%80%8F%E2%80%8FAirPodsMax/Bottom.png",
 };
 //////////////////////////////////////////////////////////////////
+
+export const DUMMY_FAVORITES: FavoriteProductType[] = [
+  {
+    _id: "dasfasdasfasdasd",
+    brand: "iPhone",
+    model: "iPhone 11",
+    image:
+      "https://res.cloudinary.com/dnxqlkwvr/image/upload/v1707824082/iMarket/Products/Iphones/11/black.png",
+  },
+  {
+    _id: "dasfasdasfsasdasd",
+    brand: "iPhone",
+    model: "iPhone 13",
+    image:
+      "https://res.cloudinary.com/dnxqlkwvr/image/upload/v1707824121/iMarket/Products/Mac/MacBook%20Pro%2014/spacegray.png",
+  },
+  {
+    _id: "dasfasdasfasdahsd",
+    brand: "iPhone",
+    model: "iPhone 15",
+    image:
+      "https://res.cloudinary.com/dnxqlkwvr/image/upload/v1707824080/iMarket/Products/AirPods/Airpods/airpods_2gen.png",
+  },
+  {
+    _id: "dasfaasasdasfasdahsd",
+    brand: "iPhone",
+    model: "iPhone 15",
+    image:
+      "https://res.cloudinary.com/dnxqlkwvr/image/upload/v1707824119/iMarket/Products/Mac/iMac/silver.png",
+  },
+];
+
+export const DUMMY_CART: CartProductType[] = [
+  {
+    _id: "dasfasdasfasdasd",
+    brand: "iPhone",
+    model: "iPhone 11",
+    option: {
+      capacity: "256GB",
+      price: 699,
+    },
+    color: {
+      name: "Black",
+      hex: "000000",
+      image:
+        "https://res.cloudinary.com/dnxqlkwvr/image/upload/v1707824082/iMarket/Products/Iphones/11/black.png",
+      _id: "65c54d12c9asdga121549e2d541",
+    },
+  },
+  {
+    _id: "dasfasdasfassdasd",
+    brand: "iPhone",
+    model: "iPhone 11",
+    option: {
+      capacity: "256GB",
+      price: 699,
+    },
+    color: {
+      name: "Black",
+      hex: "000000",
+      image:
+        "https://res.cloudinary.com/dnxqlkwvr/image/upload/v1707824119/iMarket/Products/Mac/iMac/silver.png",
+      _id: "65c54d12c9asdga121549e2d541",
+    },
+  },
+  {
+    _id: "dasfasdasfasdahsd",
+    brand: "iPhone",
+    model: "iPhone 11",
+    option: {
+      capacity: "256GB",
+      price: 699,
+    },
+    color: {
+      name: "Black",
+      hex: "000000",
+      image:
+        "https://res.cloudinary.com/dnxqlkwvr/image/upload/v1707824080/iMarket/Products/AirPods/Airpods/airpods_2gen.png",
+      _id: "65c54d12c9asdga121549e2d541",
+    },
+  },
+  {
+    _id: "dasfasdasfaggsdahsd",
+    brand: "iPhone",
+    model: "iPhone 11",
+    option: {
+      capacity: "256GB",
+      price: 699,
+    },
+    color: {
+      name: "Black",
+      hex: "000000",
+      image:
+        "https://res.cloudinary.com/dnxqlkwvr/image/upload/v1707824121/iMarket/Products/Mac/MacBook%20Pro%2014/spacegray.png",
+      _id: "65c54d12c9asdga121549e2d541",
+    },
+  },
+];
 
 export const DUMMY_PRODUCT: ProductType = {
   _id: "6554dasdd12c9a121549e2d541",

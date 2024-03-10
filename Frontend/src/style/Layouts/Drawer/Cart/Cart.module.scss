@@ -1,0 +1,59 @@
+@import "../../../global/index.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  row-gap: 10px;
+}
+
+.cartList {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  width: 100%;
+  row-gap: 10%;
+  padding-right: 40px;
+}
+
+.paySection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $backgroundColor;
+  font-size: 20px;
+  padding-right: 40px;
+  b {
+    margin-right: 10px;
+    font-weight: 550;
+  }
+  p {
+    font-weight: 350;
+  }
+
+  .buyButton {
+    @include button;
+  }
+}
+
+.cartList::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cartList::-webkit-scrollbar-thumb {
+  background-color: $backgroundColor;
+  border-radius: 5px;
+}
+@media (max-width: $phone-media-break) {
+  .cartList,
+  .paySection {
+    padding-right: 0;
+  }
+  .cartList::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .cartList::-webkit-scrollbar-thumb {
+    display: none;
+  }
+}

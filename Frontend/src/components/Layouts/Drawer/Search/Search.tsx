@@ -13,15 +13,17 @@ const Search: React.FC = () => {
 
   return (
     <div className={classes.container}>
-      <div>
-        <IoIosSearch className={classes.searchIcon} />
+      <div className={classes.inputContainer}>
+        <div>
+          <IoIosSearch className={classes.searchIcon} />
+        </div>
+        <input
+          placeholder="Search..."
+          ref={inputRef}
+          type="text"
+          className={classes.input}
+        />
       </div>
-      <input
-        placeholder="Search..."
-        ref={inputRef}
-        type="text"
-        className={classes.input}
-      />
     </div>
   );
 };

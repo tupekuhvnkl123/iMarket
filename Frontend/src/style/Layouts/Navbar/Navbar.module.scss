@@ -3,7 +3,7 @@
 .navbar {
   @include flexCenter;
   background-color: $primary-color;
-  height: 50px;
+  height: $navbar-height;
   color: $white-text-color;
   column-gap: 100px;
   padding: 0 10px;

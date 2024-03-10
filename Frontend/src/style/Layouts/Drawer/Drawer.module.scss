@@ -1,10 +1,12 @@
 @import "../../global/index.scss";
 
+$drawer-container-height: calc(100dvh - $navbar-height);
+
 .container {
   display: none;
   position: absolute;
   z-index: 100;
-  height: calc(100vh - 50px);
+  height: $drawer-container-height;
   top: 50px;
   left: 0;
   width: 100vw;
@@ -23,13 +25,15 @@ body.active-modal {
 
 .drawer {
   background-color: $primary-color;
+  height: 100%;
 }
 
 .content {
   display: flex;
   margin: 0 auto;
-  padding-top: 50px;
+  padding: 50px 0 30px 0;
   max-width: 700px;
+  height: 100%;
 }
 
 .blur {
@@ -45,10 +49,12 @@ body.active-modal {
 
 @media (max-width: $phone-media-break) {
   .container {
-    grid-template-rows: 100vh 1fr;
+    grid-template-rows: 100dvh 1fr;
   }
   .content {
     @include appWidthContainer;
+    justify-content: flex-start;
+    height: $drawer-container-height;
   }
 }
 

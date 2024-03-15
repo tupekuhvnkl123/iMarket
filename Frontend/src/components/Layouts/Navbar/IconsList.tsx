@@ -5,11 +5,11 @@ import { PiShoppingCartSimple } from "react-icons/pi";
 import Burger from "../../UI/Burger";
 import { DrawerValues } from "../Drawer/Drawer.types";
 import { useContext } from "react";
-import { GlobalContext } from "../../../context/GlobalContext";
+import { DrawerContext } from "../../../context/DrawerContext";
 import classes from "../../../style/Layouts/Navbar/IconsList.module.scss";
 
 const IconsList: React.FC = () => {
-  const { setDrawerContent, drawerContent } = useContext(GlobalContext);
+  const { setDrawerContent, drawerContent } = useContext(DrawerContext);
 
   const burgerClickHandler = () => {
     if (!!drawerContent === true) {
@@ -23,12 +23,6 @@ const IconsList: React.FC = () => {
     <ul className={classes.iconsList}>
       <li onClick={() => setDrawerContent(DrawerValues.search)}>
         <IoIosSearch className={classes.icon} />
-      </li>
-      <li
-        onClick={() => setDrawerContent(DrawerValues.favorites)}
-        className={classes.favorite}
-      >
-        <LuHeart className={classes.icon} />
       </li>
       <li onClick={() => setDrawerContent(DrawerValues.account)}>
         <AiOutlineUser className={classes.icon} />

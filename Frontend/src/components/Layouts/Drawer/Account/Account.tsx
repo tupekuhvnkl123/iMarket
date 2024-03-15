@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import Auth from "./Auth";
+import { AuthContext } from "../../../../context/AuthContext";
+import UserMenu from "./UserMenu";
 
 export type AuthFormValues = {
   email: string;
@@ -6,6 +9,9 @@ export type AuthFormValues = {
 };
 
 const Account: React.FC = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+  console.log(isLoggedIn);
+
   const authSubmitHandler = (data: AuthFormValues, isLogin: boolean) => {
     console.log(data);
 
@@ -17,9 +23,7 @@ const Account: React.FC = () => {
   };
 
   return (
-    <>
-      <Auth onSubmit={authSubmitHandler} />
-    </>
+    <>{!isLoggedIn ? <UserMenu /> : <Auth onSubmit={authSubmitHandler} />}</>
   );
 };
 

@@ -1,7 +1,7 @@
 import { DUMMY_CART } from "../../../../utils/consts";
 import CartItem from "./CartItem";
 import classes from "../../../../style/Layouts/Drawer/Cart/Cart.module.scss";
-import EmptyCartAndFavorites from "../EmptyCartAndFavorites";
+import ExploreCard from "../../../UI/ExploreCard";
 
 const Cart: React.FC = () => {
   const totalPrice = DUMMY_CART.reduce(
@@ -10,7 +10,7 @@ const Cart: React.FC = () => {
   );
 
   if (!DUMMY_CART.length) {
-    return <EmptyCartAndFavorites isCart />;
+    return <ExploreCard text="Your cart is empty..." />;
   }
 
   return (

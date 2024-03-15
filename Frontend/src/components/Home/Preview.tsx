@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { fadeInAnimation } from "../../utils/animationsVariants";
 import { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
+import { DrawerContext } from "../../context/DrawerContext";
 import classes from "../../style/Home/Preview.module.scss";
 import { DrawerValues } from "../Layouts/Drawer/Drawer.types";
 
@@ -10,7 +10,7 @@ type PreviewProps = {
 };
 
 const Preview: React.FC<PreviewProps> = ({ onClickExplore }) => {
-  const { setDrawerContent } = useContext(GlobalContext);
+  const { setDrawerContent } = useContext(DrawerContext);
 
   return (
     <section className={classes.container}>

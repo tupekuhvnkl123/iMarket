@@ -1,13 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import { ProductItemType } from "./ProductsPage.types";
-import { MdFavoriteBorder } from "react-icons/md";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import classes from "../../../style/Pages/ProductsPage/ProductItem.module.scss";
+import { useContext } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import { DrawerContext } from "../../../context/DrawerContext";
+import { DrawerValues } from "../../Layouts/Drawer/Drawer.types";
 
 type ProductItemProps = {
   data: ProductItemType;
 };
 
 const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+  const { setDrawerContent } = useContext(DrawerContext);
   const navigate = useNavigate();
   const { image, model, colors, options } = data;
 
@@ -16,9 +22,26 @@ const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
     navigate(productRoute);
   };
 
+  const favoriteHandler = () => {
+    if (isLoggedIn) {
+      console.log("adding to favorite");
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setDrawerContent(DrawerValues.account);
+    }
+  };
+
   return (
     <div className={classes.item}>
-      <MdFavoriteBorder className={classes.favoriteIcon} />
+      <div className={classes.favoriteContainer} onClick={favoriteHandler}>
+        <MdFavoriteBorder className={classes.favoriteIcon} />
+        <MdFavorite
+          className={`${classes.favoriteIcon} ${classes.filledIcon}`}
+        />
+      </div>
       <img
         onClick={navigateToProduct}
         className={classes.image}

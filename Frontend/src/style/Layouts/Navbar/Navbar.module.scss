@@ -5,7 +5,7 @@
   background-color: $primary-color;
   height: $navbar-height;
   color: $white-text-color;
-  column-gap: 100px;
+  column-gap: 115px;
   padding: 0 10px;
   transition: all 1s;
   z-index: 10000;
@@ -32,7 +32,7 @@
 
 @media (max-width: 900px) {
   .navbar {
-    column-gap: 50px;
+    column-gap: 65px;
   }
 }
 

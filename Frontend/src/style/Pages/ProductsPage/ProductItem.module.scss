@@ -6,14 +6,29 @@
   row-gap: 15px;
   position: relative;
 }
-
-.favoriteIcon {
-  cursor: pointer;
+.favoriteContainer {
   position: absolute;
   top: 20px;
   left: 20px;
-  color: $primary-color;
-  font-size: 22px;
+  cursor: pointer;
+
+  .favoriteIcon {
+    color: $primary-color;
+    font-size: 22px;
+  }
+
+  .filledIcon {
+    color: rgb(210, 0, 0);
+    display: none;
+  }
+}
+.favoriteContainer:hover {
+  .favoriteIcon {
+    display: none;
+  }
+  .filledIcon {
+    display: block;
+  }
 }
 
 .image {

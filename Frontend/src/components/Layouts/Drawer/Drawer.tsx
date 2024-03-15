@@ -1,6 +1,6 @@
 import { DrawerConfig } from "./drawer.config";
 import { useContext } from "react";
-import { GlobalContext } from "../../../context/GlobalContext";
+import { DrawerContext } from "../../../context/DrawerContext";
 import classes from "../../../style/Layouts/Drawer/Drawer.module.scss";
 
 type DrawerProps = {
@@ -9,7 +9,7 @@ type DrawerProps = {
 
 const Drawer: React.FC<DrawerProps> = ({ className }) => {
   const { drawerContent, drawerIsOpen, closeDrawer } =
-    useContext(GlobalContext);
+    useContext(DrawerContext);
   const DrawerContent = drawerContent && DrawerConfig[drawerContent];
 
   if (drawerIsOpen) {

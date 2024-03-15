@@ -1,0 +1,46 @@
+@import "../../../global/index.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+  padding-top: 30px;
+}
+.title {
+  color: rgba($secondary-color, 0.8);
+}
+.navList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 15px;
+  padding-left: 10px;
+}
+.navItem {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  color: $secondary-color;
+  font-size: 18px;
+  cursor: pointer;
+
+  .icon {
+    transition: 0.1s all ease-in-out;
+  }
+}
+.navItem:hover .icon {
+  transform: scale(1.2);
+}
+
+@media (max-width: $phone-media-break) {
+  .container {
+    padding-top: 5px;
+    padding-left: 20px;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .navItem {
+    font-size: 20px;
+  }
+}

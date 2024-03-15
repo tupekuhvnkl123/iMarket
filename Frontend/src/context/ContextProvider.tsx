@@ -1,12 +1,17 @@
 import { ReactNode } from "react";
-import { GlobalContextProvider } from "./GlobalContext";
+import { DrawerContextProvider } from "./DrawerContext";
+import { AuthContextProvider } from "./AuthContext";
 
 type ContextProviderProps = {
   children: ReactNode;
 };
 
 const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
-  return <GlobalContextProvider>{children}</GlobalContextProvider>;
+  return (
+    <AuthContextProvider>
+      <DrawerContextProvider>{children}</DrawerContextProvider>
+    </AuthContextProvider>
+  );
 };
 
 export default ContextProvider;

@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import classes from "../../../../style/Layouts/Drawer/Favorites/FavoriteItem.module.scss";
 import { appRoutes } from "../../../../utils/consts";
 import { useContext } from "react";
-import { GlobalContext } from "../../../../context/GlobalContext";
+import { DrawerContext } from "../../../../context/DrawerContext";
 
 type FavoriteItemProps = {
   product: FavoriteProductType;
 };
 
 const FavoriteItem: React.FC<FavoriteItemProps> = ({ product }) => {
-  const { closeDrawer } = useContext(GlobalContext);
+  const { closeDrawer } = useContext(DrawerContext);
   const navigate = useNavigate();
   const { brand, model, image } = product;
 

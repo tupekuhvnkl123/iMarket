@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { DrawerValues } from "../components/Layouts/Drawer/Drawer.types";
-import { GlobalContextType } from "../context/GlobalContext.types";
+import { DrawerContextType } from "../context/DrawerContext.types";
 
-const useGlobalContext = (): GlobalContextType => {
+const useDrawerContext = (): DrawerContextType => {
   const [drawerContent, setDrawerContent] = useState<DrawerValues | null>(null);
 
   const closeDrawer = () => {
@@ -17,4 +17,4 @@ const useGlobalContext = (): GlobalContextType => {
   };
 };
 
-export default useGlobalContext;
+export default useDrawerContext;

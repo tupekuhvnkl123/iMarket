@@ -4,12 +4,11 @@ import { appRoutes } from "../../../utils/consts";
 import Drawer from "../Drawer/Drawer";
 import { useContext } from "react";
 import IconsList from "./IconsList";
-import { GlobalContext } from "../../../context/GlobalContext";
+import { DrawerContext } from "../../../context/DrawerContext";
 import classes from "../../../style/Layouts/Navbar/Navbar.module.scss";
 
 const Navbar: React.FC = () => {
-  const { drawerIsOpen } = useContext(GlobalContext);
-  const { closeDrawer } = useContext(GlobalContext);
+  const { drawerIsOpen, closeDrawer } = useContext(DrawerContext);
 
   const location = useLocation();
   const route = location.pathname.replace("/", "");

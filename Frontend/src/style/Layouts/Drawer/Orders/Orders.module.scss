@@ -1,0 +1,36 @@
+@import "../../../global/index.scss";
+
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  width: 100%;
+  row-gap: 10%;
+  padding-right: 40px;
+}
+
+.ordersList::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ordersList::-webkit-scrollbar-thumb {
+  background-color: $backgroundColor;
+  border-radius: 5px;
+}
+@media (max-width: $phone-media-break) {
+  .ordersList {
+    padding-right: 0;
+  }
+  .ordersList::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  .ordersList::-webkit-scrollbar-thumb {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .ordersList {
+    row-gap: 4%;
+  }
+}

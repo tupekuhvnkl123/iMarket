@@ -1,11 +1,11 @@
 import { DUMMY_FAVORITES } from "../../../../utils/consts";
 import FavoriteItem from "./FavoriteItem";
 import classes from "../../../../style/Layouts/Drawer/Favorites/Favorites.module.scss";
-import EmptyCartAndFavorites from "../EmptyCartAndFavorites";
+import ExploreCard from "../../../UI/ExploreCard";
 
 const Favorites: React.FC = () => {
   if (!DUMMY_FAVORITES.length) {
-    return <EmptyCartAndFavorites />;
+    return <ExploreCard text="Your favorites list is empty..." />;
   }
 
   return (

@@ -29,10 +29,15 @@ export type ProductType = {
   options: ProductOptionType[];
 };
 
-export type ProductPageImagesType = {
-  preview: string;
-  bubbles: string;
-  background: string;
-  info: string[];
-  bottom?: string;
+// export type BrandProductsColorType = {
+//   _id: string;
+//   hex: string;
+// };
+
+export type BrandProductsType = {
+  _id: string;
+  // image: string;
+  model: string;
+  colors: ProductColorType[];
+  options: ProductOptionType[];
 };

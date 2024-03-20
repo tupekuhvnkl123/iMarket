@@ -16,6 +16,7 @@ const Dimensions: React.FC<DimensionsProps> = ({ data }) => {
   return (
     <div className={classes.container}>
       {Object.entries(data).map(([key, value], index) => {
+        if (key === "_id") return;
         const [firstPart, secondPart] = sliceStringToArr(value, 2);
         return (
           <motion.div

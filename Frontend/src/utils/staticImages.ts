@@ -1,4 +1,4 @@
-import { ProductPageImagesType } from "../types/Pages/ProductPage/productImages.types";
+import { ProductPageImagesType } from "../components/Pages/ProductPage/ProductPage.types";
 import {
   iPhoneProductPageImages,
   macProductPageImages,
@@ -12,17 +12,20 @@ export const matchStaticImages = (
   brand: string,
   model: string | undefined
 ): ProductPageImagesType => {
+  const loweredCaseBrand = brand.toLowerCase();
   const isIMac =
-    model === "iMac" || model === "iMac Pro" || model === "Mac Studio";
-  const isAirPodsMax = model === "AirPods Max";
+    model === "iMac" || model === "iMac-Pro" || model === "Mac-Studio";
+  const isAirPodsMax = model === "AirPods-Max";
 
-  if (brand === appRoutes.iPhone) return iPhoneProductPageImages;
-  if (brand === appRoutes.Mac && isIMac) return iMacProductPageImages;
-  if (brand === appRoutes.Mac && !isIMac) return macProductPageImages;
-  if (brand === appRoutes.AirPods && isAirPodsMax)
+  if (loweredCaseBrand === appRoutes.iPhone) return iPhoneProductPageImages;
+  if (loweredCaseBrand === appRoutes.Mac && isIMac)
+    return iMacProductPageImages;
+  if (loweredCaseBrand === appRoutes.Mac && !isIMac)
+    return macProductPageImages;
+  if (loweredCaseBrand === appRoutes.AirPods && isAirPodsMax)
     return airPodsMaxProductPageImages;
-  if (brand === appRoutes.AirPods && !isAirPodsMax)
+  if (loweredCaseBrand === appRoutes.AirPods && !isAirPodsMax)
     return airPodsProductPageImages;
 
-  return { preview: "", background: "", info: [""] };
+  return { preview: "", background: "", info: [""], bubbles: "" };
 };

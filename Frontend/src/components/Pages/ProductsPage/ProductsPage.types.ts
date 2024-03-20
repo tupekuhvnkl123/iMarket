@@ -1,18 +1,13 @@
 import {
   ProductBrandsType,
+  ProductColorType,
   ProductOptionType,
 } from "../ProductPage/ProductPage.types";
 
-export type ProductItemColorType = {
-  _id: string;
-  hex: string;
-};
-
 export type ProductItemType = {
   _id: string;
-  image: string;
   model: string;
-  colors: ProductItemColorType[];
+  colors: ProductColorType[];
   options: ProductOptionType[];
 };
 

@@ -15,7 +15,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
   const { isLoggedIn } = useContext(AuthContext);
   const { setDrawerContent } = useContext(DrawerContext);
   const navigate = useNavigate();
-  const { image, model, colors, options } = data;
+  const { model, colors, options } = data;
 
   const navigateToProduct = () => {
     const productRoute = model.replace(/ /g, "-");
@@ -45,7 +45,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
       <img
         onClick={navigateToProduct}
         className={classes.image}
-        src={image}
+        src={colors[0].image}
         alt={model}
       />
       <h2 onClick={navigateToProduct} className={classes.model}>

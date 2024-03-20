@@ -1,0 +1,58 @@
+@import "../../global/index.scss";
+
+.container {
+  @include appWidthContainer;
+  padding-top: 170px;
+  row-gap: 70px;
+}
+.previewSkeleton {
+  display: flex;
+  //   background-color: $secondary-color;
+  border-radius: 15px;
+  height: 350px;
+}
+.colorsSkeleton {
+  //   background-color: $secondary-color;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+  min-height: 420px;
+}
+.optionsSkeleton {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: $secondary-color;
+  border-radius: 15px;
+  padding: 60px 0;
+  column-gap: 60px;
+  height: 300px;
+  .option {
+    border-radius: 10px;
+    padding: 35px;
+    height: 130px;
+    width: 300px;
+  }
+}
+
+@media (max-width: 1450px) {
+  .optionsSkeleton {
+    justify-content: center;
+    column-gap: 20px;
+    .option {
+      width: 25vw;
+    }
+  }
+}
+@media (max-width: $phone-media-break) {
+  .optionsSkeleton {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    row-gap: 30px;
+    .option {
+      width: 70vw;
+    }
+  }
+}

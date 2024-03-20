@@ -14,7 +14,7 @@ import classes from "../../../style/Pages/ProductPage/ProductTemplate.module.scs
 type ProductTemplateProps = {
   productData: ProductType;
   staticImages: ProductPageImagesType;
-  productRoute: string;
+  productRoute: string | undefined;
 };
 
 const ProductTemplate: React.FC<ProductTemplateProps> = ({
@@ -22,7 +22,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   staticImages,
   productRoute,
 }) => {
-  const { _id, brand, model, colors, information, options } = productData;
+  const { brand, model, colors, information, options } = productData;
   const { background, info, preview, bottom, bubbles } = staticImages;
   const isIMac =
     productRoute === "iMac" ||

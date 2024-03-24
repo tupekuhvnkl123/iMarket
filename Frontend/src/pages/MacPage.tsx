@@ -4,6 +4,7 @@ import { macProductsPageData } from "../utils/consts";
 import { ProductsResponseType } from "./Pages.types";
 import { ProductBrandsType } from "../components/Pages/ProductPage/ProductPage.types";
 import { useQuery } from "react-query";
+import { scrollToTop } from "../utils/functions";
 
 const { VITE_API_ENDPOINT } = import.meta.env;
 
@@ -20,6 +21,8 @@ const MacPage: React.FC = () => {
     `${ProductBrandsType.Mac}-data`,
     fetchData
   );
+  scrollToTop("auto");
+
   return (
     <>
       <ProductsTemplate

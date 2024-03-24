@@ -4,6 +4,7 @@ import ProductsTemplate from "../components/Pages/ProductsPage/ProductsTemplate"
 import { airPodsProductsPageData } from "../utils/consts";
 import { ProductsResponseType } from "./Pages.types";
 import { useQuery } from "react-query";
+import { scrollToTop } from "../utils/functions";
 
 const { VITE_API_ENDPOINT } = import.meta.env;
 
@@ -20,6 +21,7 @@ const AirPodsPage: React.FC = () => {
     `${ProductBrandsType.AirPods}-data`,
     fetchData
   );
+  scrollToTop("auto");
 
   return (
     <>

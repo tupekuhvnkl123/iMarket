@@ -8,3 +8,10 @@ export const sliceStringToArr = (string: string, sliceIndex: number) => {
 
   return [firstPart, secondPart];
 };
+
+export const scrollToTop = (behavior: "auto" | "smooth") => {
+  window.scrollTo({
+    top: 0,
+    behavior,
+  });
+};

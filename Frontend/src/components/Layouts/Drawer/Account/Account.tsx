@@ -10,7 +10,6 @@ export type AuthFormValues = {
 
 const Account: React.FC = () => {
   const { isLoggedIn } = useContext(AuthContext);
-  console.log(isLoggedIn);
 
   const authSubmitHandler = (data: AuthFormValues, isLogin: boolean) => {
     console.log(data);
@@ -23,7 +22,7 @@ const Account: React.FC = () => {
   };
 
   return (
-    <>{!isLoggedIn ? <UserMenu /> : <Auth onSubmit={authSubmitHandler} />}</>
+    <>{isLoggedIn ? <UserMenu /> : <Auth onSubmit={authSubmitHandler} />}</>
   );
 };
 

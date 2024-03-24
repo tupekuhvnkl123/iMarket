@@ -7,6 +7,7 @@ import { ProductResponseType } from "./Pages.types";
 import { useNavigate } from "react-router-dom";
 import { Snackbar } from "@mui/material";
 import ProductLoadingSkeleton from "../components/Pages/ProductPage/ProductLoadingSkeleton";
+import { scrollToTop } from "../utils/functions";
 
 const { VITE_API_ENDPOINT } = import.meta.env;
 
@@ -31,6 +32,7 @@ const ProductPage: React.FC = () => {
   const { data, isError, isLoading } = useQuery(`${model}`, fetchData);
 
   const errorMessage = "Could not find product info, please try to refresh.";
+  scrollToTop("auto");
 
   return (
     <>

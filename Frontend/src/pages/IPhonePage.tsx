@@ -4,6 +4,7 @@ import ProductsTemplate from "../components/Pages/ProductsPage/ProductsTemplate"
 import { iPhoneProductsPageData } from "../utils/consts";
 import { ProductBrandsType } from "../components/Pages/ProductPage/ProductPage.types";
 import { ProductsResponseType } from "./Pages.types";
+import { scrollToTop } from "../utils/functions";
 
 const { VITE_API_ENDPOINT } = import.meta.env;
 
@@ -20,6 +21,7 @@ const IPhonePage: React.FC = () => {
     `${ProductBrandsType.iPhone}-data`,
     fetchData
   );
+  scrollToTop("auto");
 
   return (
     <>

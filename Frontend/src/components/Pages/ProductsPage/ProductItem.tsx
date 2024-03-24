@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { DrawerContext } from "../../../context/DrawerContext";
 import { DrawerValues } from "../../Layouts/Drawer/Drawer.types";
+import { scrollToTop } from "../../../utils/functions";
 
 type ProductItemProps = {
   data: ProductItemType;
@@ -26,10 +27,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
     if (isLoggedIn) {
       console.log("adding to favorite");
     } else {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      scrollToTop("smooth");
       setDrawerContent(DrawerValues.account);
     }
   };

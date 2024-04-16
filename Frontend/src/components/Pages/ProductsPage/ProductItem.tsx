@@ -7,12 +7,19 @@ import { AuthContext } from "../../../context/AuthContext";
 import { DrawerContext } from "../../../context/DrawerContext";
 import { DrawerValues } from "../../Layouts/Drawer/Drawer.types";
 import { scrollToTop } from "../../../utils/functions";
+import { UseMutateFunction } from "react-query";
 
 type ProductItemProps = {
   data: ProductItemType;
+  onAddToFavorite: UseMutateFunction<void, unknown, string, unknown>;
+  addedToFav: boolean | undefined;
 };
 
-const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
+const ProductItem: React.FC<ProductItemProps> = ({
+  data,
+  onAddToFavorite,
+  addedToFav,
+}) => {
   const { isLoggedIn } = useContext(AuthContext);
   const { setDrawerContent } = useContext(DrawerContext);
   const navigate = useNavigate();
@@ -25,7 +32,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
 
   const favoriteHandler = () => {
     if (isLoggedIn) {
-      console.log("adding to favorite");
+      onAddToFavorite(model);
     } else {
       scrollToTop("smooth");
       setDrawerContent(DrawerValues.account);
@@ -34,11 +41,14 @@ const ProductItem: React.FC<ProductItemProps> = ({ data }) => {
 
   return (
     <div className={classes.item}>
-      <div className={classes.favoriteContainer} onClick={favoriteHandler}>
-        <MdFavoriteBorder className={classes.favoriteIcon} />
-        <MdFavorite
-          className={`${classes.favoriteIcon} ${classes.filledIcon}`}
-        />
+      <div
+        className={`${classes.favoriteContainer} ${
+          addedToFav ? classes.filled : ""
+        }`}
+        onClick={favoriteHandler}
+      >
+        <MdFavoriteBorder className={classes.borderedIcon} />
+        <MdFavorite className={classes.filledIcon} />
       </div>
       <img
         onClick={navigateToProduct}

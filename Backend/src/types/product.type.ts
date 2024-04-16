@@ -1,18 +1,25 @@
+import { Types } from "mongoose";
+
 export type ProductColorType = {
-  _id: string;
+  _id: Types.ObjectId;
   name: string;
   hex: string;
   image: string;
 };
 
 export type ProductInformationType = {
+  _id: Types.ObjectId;
   width: string;
   height: string;
   depth: string;
   weight: string;
 };
 
-export type ProductOptionType = { capacity: string; price: number };
+export type ProductOptionType = {
+  _id: Types.ObjectId;
+  capacity: string;
+  price: number;
+};
 
 export enum ProductBrandsType {
   Mac = "Mac",
@@ -21,7 +28,7 @@ export enum ProductBrandsType {
 }
 
 export type ProductType = {
-  _id: string;
+  _id: Types.ObjectId;
   brand: ProductBrandsType;
   model: string;
   colors: ProductColorType[];
@@ -29,13 +36,8 @@ export type ProductType = {
   options: ProductOptionType[];
 };
 
-// export type BrandProductsColorType = {
-//   _id: string;
-//   hex: string;
-// };
-
 export type BrandProductsType = {
-  _id: string;
+  _id: Types.ObjectId;
   // image: string;
   model: string;
   colors: ProductColorType[];

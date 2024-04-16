@@ -8,6 +8,10 @@ type AuthContextProviderProps = {
 
 const initialValue = {
   isLoggedIn: false,
+  user: null,
+  login: () => {},
+  logout: () => {},
+  loggedInSucceed: false,
 };
 
 export const AuthContext = createContext<AuthContextType>(initialValue);

@@ -1,25 +1,57 @@
-import { DUMMY_CART } from "../../../../utils/consts";
 import CartItem from "./CartItem";
 import classes from "../../../../style/Layouts/Drawer/Cart/Cart.module.scss";
 import ExploreCard from "../../../UI/ExploreCard";
+import { useQuery } from "react-query";
+import { PuffLoader } from "react-spinners";
+import { CartProductType } from "./Cart.types";
+import { Snackbar } from "@mui/material";
+import { getAxiosRequest, getErrorMsg } from "../../../../utils/functions";
+import { useContext } from "react";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const Cart: React.FC = () => {
-  const totalPrice = DUMMY_CART.reduce(
-    (total, product) => total + product.option.price,
-    0
-  );
+  const { isLoggedIn } = useContext(AuthContext);
+  const { data, isError, isLoading, error } = useQuery("cart", {
+    enabled: isLoggedIn,
+    queryFn: () => getAxiosRequest<{ cart: CartProductType[] }>("/cart"),
+  });
 
-  if (!DUMMY_CART.length) {
+  if (isLoading) {
+    return (
+      <div className={classes.loaderContainer}>
+        <PuffLoader color="white" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Snackbar
+        open={isError}
+        autoHideDuration={5000}
+        message={getErrorMsg(error)}
+      />
+    );
+  }
+
+  if (!data?.cart?.length) {
     return <ExploreCard text="Your cart is empty..." />;
   }
 
+  const totalPrice = data?.cart?.reduce(
+    (total, product: CartProductType) => total + product.option.price,
+    0
+  );
+
   return (
     <div className={classes.container}>
-      <ul className={classes.cartList}>
-        {DUMMY_CART.map((product) => (
-          <CartItem key={product._id} product={product} />
-        ))}
-      </ul>
+      {data && (
+        <ul className={classes.cartList}>
+          {data.cart.map((product: CartProductType) => (
+            <CartItem key={product._id} product={product} />
+          ))}
+        </ul>
+      )}
       <div className={classes.paySection}>
         <p>
           <b>Total:</b> {totalPrice}$

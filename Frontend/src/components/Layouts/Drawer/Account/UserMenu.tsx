@@ -6,9 +6,11 @@ import classes from "../../../../style/Layouts/Drawer/Account/UserMenu.module.sc
 import { useContext } from "react";
 import { DrawerContext } from "../../../../context/DrawerContext";
 import { DrawerValues } from "../Drawer.types";
+import { AuthContext } from "../../../../context/AuthContext";
 
 const UserMenu: React.FC = () => {
   const { setDrawerContent } = useContext(DrawerContext);
+  const { logout } = useContext(AuthContext);
 
   return (
     <div className={classes.container}>
@@ -32,7 +34,7 @@ const UserMenu: React.FC = () => {
           <AiOutlineUser className={classes.icon} />
           <p>Account</p>
         </li>
-        <li className={classes.navItem}>
+        <li className={classes.navItem} onClick={logout}>
           <PiSignOut className={classes.icon} />
           <p>Sign Out</p>
         </li>

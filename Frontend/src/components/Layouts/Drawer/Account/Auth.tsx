@@ -1,15 +1,23 @@
-import { useState } from "react";
-import { AuthFormValues } from "./Account";
+import { AuthFormValues } from "./Account.types";
 import AuthForm from "./AuthForm";
 import classes from "../../../../style/Layouts/Drawer/Account/Auth.module.scss";
+import { SetStateType } from "../../../../types/custom.types";
 
 type AuthProps = {
   onSubmit: (data: AuthFormValues, isLogin: boolean) => void;
+  errorMsg: string;
+  isLoading: boolean;
+  setIsLogin: SetStateType<boolean>;
+  isLogin: boolean;
 };
 
-const Auth: React.FC<AuthProps> = ({ onSubmit }) => {
-  const [isLogin, setIsLogin] = useState<boolean>(true);
-
+const Auth: React.FC<AuthProps> = ({
+  onSubmit,
+  errorMsg,
+  isLoading,
+  setIsLogin,
+  isLogin,
+}) => {
   return (
     <div className={classes.container}>
       <div className={classes.selectAuth}>
@@ -27,7 +35,12 @@ const Auth: React.FC<AuthProps> = ({ onSubmit }) => {
           Create Account
         </p>
       </div>
-      <AuthForm onSubmit={onSubmit} isLogin={isLogin} />
+      <AuthForm
+        onSubmit={onSubmit}
+        isLogin={isLogin}
+        errorMsg={errorMsg}
+        isLoading={isLoading}
+      />
       {isLogin && (
         <div className={classes.demoAccount}>
           <p>

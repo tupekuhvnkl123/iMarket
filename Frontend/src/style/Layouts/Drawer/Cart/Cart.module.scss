@@ -7,6 +7,11 @@
   row-gap: 10px;
 }
 
+.loaderContainer {
+  @include flexCenter;
+  width: 100%;
+}
+
 .cartList {
   display: flex;
   flex-direction: column;
@@ -44,6 +49,7 @@
   background-color: $backgroundColor;
   border-radius: 5px;
 }
+
 @media (max-width: $phone-media-break) {
   .cartList,
   .paySection {

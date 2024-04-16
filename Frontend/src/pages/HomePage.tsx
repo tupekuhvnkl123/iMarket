@@ -14,8 +14,6 @@ const HomePage: React.FC = () => {
   };
 
   const productClickHandler = (route: string | undefined) => {
-    console.log(route);
-
     if (route) {
       const productRoute = `/${route.toLowerCase()}`;
       navigate(productRoute);

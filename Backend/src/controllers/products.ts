@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction } from "express";
 import { ReqParams, ResJson } from "../types/custom";
 import createHttpError from "http-errors";
 import Product from "../models/product";
@@ -7,6 +7,7 @@ import {
   ProductBrandsType,
   ProductType,
 } from "../types/product.type";
+import { getProductByModel } from "../services/mongoose/product";
 
 export const getBrandProducts = async (
   req: ReqParams<{ brand: ProductBrandsType }>,
@@ -41,11 +42,7 @@ export const getProduct = async (
   const modifiedModel = model.replace(/-/g, " ");
 
   try {
-    const product: ProductType | null = await Product.findOne({
-      model: modifiedModel,
-    });
-
-    if (!product) throw createHttpError.BadRequest("Product not found.");
+    const product = await getProductByModel(modifiedModel);
 
     res.status(200).json({ product });
   } catch (error) {

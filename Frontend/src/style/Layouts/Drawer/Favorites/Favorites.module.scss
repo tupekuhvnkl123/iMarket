@@ -8,6 +8,10 @@
   row-gap: 15px;
   padding-right: 10px;
 }
+.loaderContainer {
+  @include flexCenter;
+  width: 100%;
+}
 
 .favoritesList::-webkit-scrollbar {
   width: 5px;

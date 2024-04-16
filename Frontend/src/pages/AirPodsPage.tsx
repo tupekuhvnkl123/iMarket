@@ -1,23 +1,18 @@
-import axios from "axios";
 import { ProductBrandsType } from "../components/Pages/ProductPage/ProductPage.types";
 import ProductsTemplate from "../components/Pages/ProductsPage/ProductsTemplate";
 import { airPodsProductsPageData } from "../utils/consts";
 import { ProductsResponseType } from "./Pages.types";
 import { useQuery } from "react-query";
-import { scrollToTop } from "../utils/functions";
-
-const { VITE_API_ENDPOINT } = import.meta.env;
+import { getAxiosRequest, getErrorMsg, scrollToTop } from "../utils/functions";
+import { ProductItemType } from "../components/Pages/ProductsPage/ProductsPage.types";
 
 const AirPodsPage: React.FC = () => {
-  const fetchData = async (): ProductsResponseType => {
-    const response = await axios.get(
-      `${VITE_API_ENDPOINT}/products/brand/${ProductBrandsType.AirPods}`
+  const fetchData = (): ProductsResponseType =>
+    getAxiosRequest<{ products: ProductItemType[] }>(
+      `/products/brand/${ProductBrandsType.AirPods}`
     );
 
-    return response.data;
-  };
-
-  const { data, isError, isLoading } = useQuery(
+  const { data, isError, isLoading, error } = useQuery(
     `${ProductBrandsType.AirPods}-data`,
     fetchData
   );
@@ -30,6 +25,7 @@ const AirPodsPage: React.FC = () => {
         isLoading={isLoading}
         products={data?.products}
         staticData={airPodsProductsPageData}
+        errorMsg={getErrorMsg(error)}
       />
     </>
   );

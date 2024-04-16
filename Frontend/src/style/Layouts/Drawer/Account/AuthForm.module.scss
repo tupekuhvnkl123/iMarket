@@ -46,6 +46,8 @@
 
 .authButton {
   @include button;
+  @include flexCenter;
+
   max-width: 150px;
 }
 

@@ -1,27 +1,25 @@
 import { useQuery } from "react-query";
-import axios from "axios";
 import ProductsTemplate from "../components/Pages/ProductsPage/ProductsTemplate";
 import { iPhoneProductsPageData } from "../utils/consts";
 import { ProductBrandsType } from "../components/Pages/ProductPage/ProductPage.types";
 import { ProductsResponseType } from "./Pages.types";
-import { scrollToTop } from "../utils/functions";
-
-const { VITE_API_ENDPOINT } = import.meta.env;
+import { getAxiosRequest, getErrorMsg, scrollToTop } from "../utils/functions";
+import { ProductItemType } from "../components/Pages/ProductsPage/ProductsPage.types";
+import { useEffect } from "react";
 
 const IPhonePage: React.FC = () => {
-  const fetchData = async (): ProductsResponseType => {
-    const response = await axios.get(
-      `${VITE_API_ENDPOINT}/products/brand/${ProductBrandsType.iPhone}`
+  const fetchData = (): ProductsResponseType =>
+    getAxiosRequest<{ products: ProductItemType[] }>(
+      `/products/brand/${ProductBrandsType.iPhone}`
     );
 
-    return response.data;
-  };
-
-  const { data, isError, isLoading } = useQuery(
+  const { data, isError, isLoading, error } = useQuery(
     `${ProductBrandsType.iPhone}-data`,
     fetchData
   );
-  scrollToTop("auto");
+  useEffect(() => {
+    scrollToTop("auto");
+  }, []);
 
   return (
     <>
@@ -30,6 +28,7 @@ const IPhonePage: React.FC = () => {
         isLoading={isLoading}
         products={data?.products}
         staticData={iPhoneProductsPageData}
+        errorMsg={getErrorMsg(error)}
         iPhonePage
       />
     </>

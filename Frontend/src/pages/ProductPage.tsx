@@ -7,9 +7,8 @@ import { ProductResponseType } from "./Pages.types";
 import { useNavigate } from "react-router-dom";
 import { Snackbar } from "@mui/material";
 import ProductLoadingSkeleton from "../components/Pages/ProductPage/ProductLoadingSkeleton";
-import { scrollToTop } from "../utils/functions";
-
-const { VITE_API_ENDPOINT } = import.meta.env;
+import { getErrorMsg, scrollToTop } from "../utils/functions";
+import { useEffect } from "react";
 
 const ProductPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +20,7 @@ const ProductPage: React.FC = () => {
   const staticImages = matchStaticImages(brand, model);
 
   const fetchData = async (): ProductResponseType => {
-    const response = await axios.get(`${VITE_API_ENDPOINT}/products/${model}`);
+    const response = await axios.get(`/products/${model}`);
     if (response.data.product.brand !== brand) {
       const productRoute = `/${response.data.product.brand}/${model}`;
       navigate(productRoute);
@@ -29,10 +28,11 @@ const ProductPage: React.FC = () => {
     return response.data;
   };
 
-  const { data, isError, isLoading } = useQuery(`${model}`, fetchData);
+  const { data, isError, isLoading, error } = useQuery(`${model}`, fetchData);
 
-  const errorMessage = "Could not find product info, please try to refresh.";
-  scrollToTop("auto");
+  useEffect(() => {
+    scrollToTop("auto");
+  }, []);
 
   return (
     <>
@@ -48,7 +48,7 @@ const ProductPage: React.FC = () => {
         <Snackbar
           open={isError}
           autoHideDuration={5000}
-          message={errorMessage}
+          message={getErrorMsg(error)}
         />
       )}
     </>

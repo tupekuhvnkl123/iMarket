@@ -13,7 +13,7 @@
   left: 20px;
   cursor: pointer;
 
-  .favoriteIcon {
+  .borderedIcon {
     color: $primary-color;
     font-size: 22px;
   }
@@ -21,10 +21,12 @@
   .filledIcon {
     color: rgb(210, 0, 0);
     display: none;
+    font-size: 22px;
   }
 }
+.filled,
 .favoriteContainer:hover {
-  .favoriteIcon {
+  .borderedIcon {
     display: none;
   }
   .filledIcon {

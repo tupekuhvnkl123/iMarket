@@ -8,7 +8,10 @@
   row-gap: 10%;
   padding-right: 40px;
 }
-
+.loaderContainer {
+  @include flexCenter;
+  width: 100%;
+}
 .ordersList::-webkit-scrollbar {
   width: 5px;
 }

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import PreviewCard from "./PreviewCard";
 import ProductItem from "./ProductItem";
 import {
@@ -9,6 +9,11 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import classes from "../../../style/Pages/ProductsPage/ProductsTemplate.module.scss";
 import { Snackbar } from "@mui/material";
+import axios from "axios";
+import { useMutation, useQuery } from "react-query";
+import { AuthContext } from "../../../context/AuthContext";
+import { getAxiosRequest } from "../../../utils/functions";
+import { FavoriteProductType } from "../../Layouts/Drawer/Favorites/Favorites.types";
 
 const skeletonItems = [0, 1, 2, 3, 4, 5, 6, 7];
 
@@ -18,6 +23,7 @@ type ProductsTemplateProps = {
   iPhonePage?: boolean;
   isLoading: boolean;
   isError: boolean;
+  errorMsg: string;
 };
 
 const ProductsTemplate: React.FC<ProductsTemplateProps> = ({
@@ -26,7 +32,26 @@ const ProductsTemplate: React.FC<ProductsTemplateProps> = ({
   iPhonePage,
   isLoading,
   isError,
+  errorMsg,
 }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+  const { data: favorites, refetch } = useQuery("favorites", {
+    enabled: isLoggedIn,
+    queryFn: () =>
+      getAxiosRequest<{ favorites: FavoriteProductType[] }>("/user/favorites"),
+  });
+  const addToFavorite = async (model: string) => {
+    const response = await axios.post("/user/addToFavorite", { model });
+    return response.data;
+  };
+
+  const addToFavoriteMutation = useMutation({
+    mutationFn: (model: string) =>
+      addToFavorite(model).then(() => {
+        refetch();
+      }),
+  });
+
   const productsListRef = useRef<HTMLUListElement>(null);
   const { previewImage, background, title } = staticData;
 
@@ -35,8 +60,6 @@ const ProductsTemplate: React.FC<ProductsTemplateProps> = ({
       productsListRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  const errorMessage = "Could not fetch products, please try to refresh.";
 
   return (
     <main>
@@ -59,15 +82,26 @@ const ProductsTemplate: React.FC<ProductsTemplateProps> = ({
             <Skeleton key={num} className={classes.skeletonItem} />
           ))}
         {products &&
-          products.map((product) => (
-            <ProductItem key={product._id} data={product} />
-          ))}
+          products.map((product) => {
+            const favorited = favorites?.favorites.some(
+              (fav: FavoriteProductType) => fav._id === product._id
+            );
+
+            return (
+              <ProductItem
+                key={product._id}
+                data={product}
+                onAddToFavorite={addToFavoriteMutation.mutate}
+                addedToFav={favorited}
+              />
+            );
+          })}
       </ul>
-      {isError && (
+      {(isError || addToFavoriteMutation.isError) && (
         <Snackbar
-          open={isError}
+          open={isError || addToFavoriteMutation.isError}
           autoHideDuration={5000}
-          message={errorMessage}
+          message={errorMsg}
         />
       )}
     </main>

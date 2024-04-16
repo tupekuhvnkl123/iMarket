@@ -1,40 +1,46 @@
 //// Packages
-import { useState, useEffect } from "react";
-// import Cookies from "js-cookie";
+import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router";
+import Cookies from "js-cookie";
+import { UserContextType } from "../context/AuthContext.types";
 
 const useAuthContext = () => {
-  //   const router = useRouter();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  //   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const [loggedInSucceed, setLoggedInSucceed] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [user, setUser] = useState<UserContextType | null>(null);
 
-  //   const login = useCallback((data, endingPath) => {
-  //     setIsLoggedIn(!!data.accessToken);
-  //     setUser(data.userData);
-  //     const storedUser = {
-  //       ...data.userData,
-  //       token: data.token,
-  //     };
-  //     // const twoHourFromNow = new Date(new Date().getTime() + 2 * 60 * 60 * 1000);
-  //     Cookies.set("user", JSON.stringify(storedUser), {
-  //       expires: 2 / 28,
-  //     });
-  //   }, []);
-
-  //   const logout = useCallback((endingPath) => {
-  //     setIsLoggedIn(false);
-  //     setUser(null);
-  //     Cookies.remove("user");
-  //     router.reload();
-  //   }, []);
-
-  useEffect(() => {
-    // const storedUser = Cookies.get("user");
-    // if (!storedUser.token) {
-    //   logout();
-    // }
+  const login = useCallback((user: UserContextType) => {
+    const userString = JSON.stringify(user);
+    Cookies.set("user", userString, { expires: 3 });
+    setIsLoggedIn(!!user.token);
+    setUser(user);
+    setLoggedInSucceed(true);
+    setTimeout(() => {
+      setLoggedInSucceed(false);
+    }, 3000);
   }, []);
 
-  return { isLoggedIn };
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+    setUser(null);
+    Cookies.remove("user");
+    navigate(0);
+  }, [navigate]);
+
+  useEffect(() => {
+    const storedUser = Cookies.get("user");
+    if ((!storedUser && user) || (!storedUser && isLoggedIn)) {
+      logout();
+    }
+    if (storedUser && !user) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+      setIsLoggedIn(true);
+    }
+  }, [isLoggedIn, user, logout]);
+
+  return { isLoggedIn, login, logout, user, loggedInSucceed };
 };
 
 export default useAuthContext;

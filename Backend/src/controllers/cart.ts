@@ -14,7 +14,7 @@ const createCartItem = (
 ) => ({
   product: product._id,
   option: product.options.find((option) => option._id.toString() === optionId),
-  color: product.options.find((color) => color._id.toString() === colorId),
+  color: product.colors.find((color) => color._id.toString() === colorId),
 });
 
 export const getCart = async (
@@ -50,26 +50,31 @@ export const addToCart = async (
   next: NextFunction
 ) => {
   const { model, colorId, optionId } = req.body;
+
   try {
     const product = await getProductByModel(model);
 
     const user = await getUserById(req.userData.userId);
 
-    const productExist = user.cart.some((item) => item.product === product._id);
+    const productExist = user.cart.some(
+      (item) => item.product._id.toString() === product._id.toString()
+    );
+
+    const modelName = model.replace(/-/g, " ");
 
     if (productExist) {
-      throw createHttpError.NotFound("Product already in your cart.");
+      throw createHttpError[403](`${modelName} already in your cart.`);
     } else {
       const cartItem = createCartItem(product, colorId, optionId);
       user.cart.push(cartItem);
       await user.save();
     }
 
-    res.status(200).json({ message: `${model} added to your cart.` });
+    res.status(200).json({ message: `${modelName} added to your cart.` });
   } catch (error) {
     next(error);
   }
-}; //! Test Required
+};
 
 export const removeFromCart = async (
   req: UserDataRequest<{ model: string }>,

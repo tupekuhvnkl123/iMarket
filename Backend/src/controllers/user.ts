@@ -39,7 +39,6 @@ export const addToFavorites = async (
   res: Response,
   next: NextFunction
 ) => {
-  throw createHttpError.NotFound("Product already in you cr");
   const { model } = req.body;
   try {
     const product = await getProductByModel(model);

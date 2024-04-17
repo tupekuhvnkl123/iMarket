@@ -1,21 +1,18 @@
 import { useContext, useRef } from "react";
+import { useMutation, useQuery } from "react-query";
+import { Snackbar } from "@mui/material";
 import PreviewCard from "./PreviewCard";
-import ProductItem from "./ProductItem";
 import {
   ProductItemType,
   ProductsPageStaticDataType,
 } from "./ProductsPage.types";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import classes from "../../../style/Pages/ProductsPage/ProductsTemplate.module.scss";
-import { Snackbar } from "@mui/material";
 import axios from "axios";
-import { useMutation, useQuery } from "react-query";
 import { AuthContext } from "../../../context/AuthContext";
 import { getAxiosRequest } from "../../../utils/functions";
 import { FavoriteProductType } from "../../Layouts/Drawer/Favorites/Favorites.types";
-
-const skeletonItems = [0, 1, 2, 3, 4, 5, 6, 7];
+import ProductsList from "./ProductsList";
+import classes from "../../../style/Pages/ProductsPage/ProductsTemplate.module.scss";
 
 type ProductsTemplateProps = {
   staticData: ProductsPageStaticDataType;
@@ -45,7 +42,7 @@ const ProductsTemplate: React.FC<ProductsTemplateProps> = ({
     return response.data;
   };
 
-  const addToFavoriteMutation = useMutation({
+  const { mutate: addToFavHandler, isError: addToFavIsError } = useMutation({
     mutationFn: (model: string) =>
       addToFavorite(model).then(() => {
         refetch();
@@ -76,34 +73,19 @@ const ProductsTemplate: React.FC<ProductsTemplateProps> = ({
           />
         </section>
       </div>
-      <ul ref={productsListRef} className={classes.productsList}>
-        {isLoading &&
-          skeletonItems.map((num) => (
-            <Skeleton key={num} className={classes.skeletonItem} />
-          ))}
-        {products &&
-          products.map((product) => {
-            const favorited = favorites?.favorites.some(
-              (fav: FavoriteProductType) => fav._id === product._id
-            );
+      <ProductsList
+        products={products}
+        productsListRef={productsListRef}
+        isLoading={isLoading}
+        addToFavHandler={addToFavHandler}
+        favorites={favorites}
+      />
 
-            return (
-              <ProductItem
-                key={product._id}
-                data={product}
-                onAddToFavorite={addToFavoriteMutation.mutate}
-                addedToFav={favorited}
-              />
-            );
-          })}
-      </ul>
-      {(isError || addToFavoriteMutation.isError) && (
-        <Snackbar
-          open={isError || addToFavoriteMutation.isError}
-          autoHideDuration={5000}
-          message={errorMsg}
-        />
-      )}
+      <Snackbar
+        open={isError || addToFavIsError}
+        autoHideDuration={5000}
+        message={errorMsg}
+      />
     </main>
   );
 };

@@ -23,7 +23,7 @@ export const getAxiosRequest = async <T>(url: string): Promise<T> => {
   return response.data;
 };
 
-export const getErrorMsg = (error: unknown) => {
+export const getErrorMsg = (error: unknown): string => {
   if (error instanceof AxiosError && error?.response?.data) {
     return error.response.data.error.message;
   }

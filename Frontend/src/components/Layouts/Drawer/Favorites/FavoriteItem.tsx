@@ -4,12 +4,17 @@ import classes from "../../../../style/Layouts/Drawer/Favorites/FavoriteItem.mod
 import { appRoutes } from "../../../../utils/consts";
 import { useContext } from "react";
 import { DrawerContext } from "../../../../context/DrawerContext";
+import { UseMutateFunction } from "react-query";
 
 type FavoriteItemProps = {
   product: FavoriteProductType;
+  onRemoveFavorite: UseMutateFunction<void, unknown, string, unknown>;
 };
 
-const FavoriteItem: React.FC<FavoriteItemProps> = ({ product }) => {
+const FavoriteItem: React.FC<FavoriteItemProps> = ({
+  product,
+  onRemoveFavorite,
+}) => {
   const { closeDrawer } = useContext(DrawerContext);
   const navigate = useNavigate();
   const { brand, model, image } = product;
@@ -36,7 +41,11 @@ const FavoriteItem: React.FC<FavoriteItemProps> = ({ product }) => {
           >
             Explore
           </button>
-          <button className={classes.removeBtn} type="button">
+          <button
+            className={classes.removeBtn}
+            type="button"
+            onClick={() => onRemoveFavorite(model)}
+          >
             Remove
           </button>
         </div>

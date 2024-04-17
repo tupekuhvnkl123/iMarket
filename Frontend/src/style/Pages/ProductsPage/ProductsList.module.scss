@@ -1,0 +1,22 @@
+@import "../../global/index.scss";
+
+.productsList {
+  @include appWidthContainer;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 4vw, 100px);
+  margin-top: -100px;
+}
+
+@media (max-width: 1100px) {
+  .productsList {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+    gap: clamp(20px, 3vw, 100px);
+  }
+}
+
+.skeletonItem {
+  @include card;
+  min-height: 300px;
+}

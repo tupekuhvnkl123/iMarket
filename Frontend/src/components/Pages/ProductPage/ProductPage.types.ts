@@ -6,13 +6,18 @@ export type ProductColorType = {
 };
 
 export type ProductInformationType = {
+  _id: string;
   width: string;
   height: string;
   depth: string;
   weight: string;
 };
 
-export type ProductOptionType = { capacity: string; price: number };
+export type ProductOptionType = {
+  _id: string;
+  capacity: string;
+  price: number;
+};
 
 export enum ProductBrandsType {
   Mac = "Mac",

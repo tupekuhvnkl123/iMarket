@@ -1,20 +1,37 @@
 import FavoriteItem from "./FavoriteItem";
 import classes from "../../../../style/Layouts/Drawer/Favorites/Favorites.module.scss";
 import ExploreCard from "../../../UI/ExploreCard";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { PuffLoader } from "react-spinners";
 import { Snackbar } from "@mui/material";
 import { FavoriteProductType } from "./Favorites.types";
 import { getAxiosRequest, getErrorMsg } from "../../../../utils/functions";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
+import axios from "axios";
 
 const Favorites: React.FC = () => {
   const { isLoggedIn } = useContext(AuthContext);
-  const { data, isError, isLoading, error } = useQuery("favorites", {
+  const { data, isError, isLoading, error, refetch } = useQuery("favorites", {
     enabled: isLoggedIn,
     queryFn: () =>
       getAxiosRequest<{ favorites: FavoriteProductType[] }>("/user/favorites"),
+  });
+
+  const removeFromFavorite = async (model: string) => {
+    const response = await axios.post("/user/addToFavorite", { model });
+    return response.data;
+  };
+
+  const {
+    mutate: removeFavHandler,
+    isError: removeFavIsError,
+    error: removeFavError,
+  } = useMutation({
+    mutationFn: (model: string) =>
+      removeFromFavorite(model).then(() => {
+        refetch();
+      }),
   });
 
   if (isLoading) {
@@ -25,27 +42,29 @@ const Favorites: React.FC = () => {
     );
   }
 
-  if (isError) {
-    return (
-      <Snackbar
-        open={isError}
-        autoHideDuration={5000}
-        message={getErrorMsg(error)}
-      />
-    );
-  }
-
   if (!data?.favorites?.length) {
     return <ExploreCard text="Your favorites list is empty..." />;
   }
 
   return (
-    <ul className={classes.favoritesList}>
-      {data &&
-        data.favorites.map((product: FavoriteProductType) => (
-          <FavoriteItem key={product._id} product={product} />
-        ))}
-    </ul>
+    <>
+      <ul className={classes.favoritesList}>
+        {data &&
+          data.favorites.map((product: FavoriteProductType) => (
+            <FavoriteItem
+              key={product._id}
+              product={product}
+              onRemoveFavorite={removeFavHandler}
+            />
+          ))}
+      </ul>
+
+      <Snackbar
+        open={isError || removeFavIsError}
+        autoHideDuration={5000}
+        message={getErrorMsg(error || removeFavError)}
+      />
+    </>
   );
 };
 

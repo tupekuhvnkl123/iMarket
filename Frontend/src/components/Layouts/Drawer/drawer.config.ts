@@ -5,6 +5,7 @@ import Search from "./Search/Search";
 import Favorites from "./Favorites/Favorites";
 import Cart from "./Cart/Cart";
 import Orders from "./Orders/Orders";
+import Settings from "./Settings/Settings";
 
 export type DrawerContentProps = {
   closeDrawer?: () => void;
@@ -17,4 +18,5 @@ export const DrawerConfig = {
   [DrawerValues.search]: Search,
   [DrawerValues.navLinks]: NavLinks,
   [DrawerValues.orders]: Orders,
+  [DrawerValues.settings]: Settings,
 };

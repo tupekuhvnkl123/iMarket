@@ -25,7 +25,7 @@ export const getAxiosRequest = async <T>(url: string): Promise<T> => {
 
 export const getErrorMsg = (error: unknown): string => {
   if (error instanceof AxiosError && error?.response?.data) {
-    return error.response.data.error.message;
+    return error.response.data.error?.message || error.message;
   }
   return "Internal server error. Please try to refresh.";
 };

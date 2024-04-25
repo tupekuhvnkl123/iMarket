@@ -16,9 +16,6 @@ const useAuthContext = () => {
     setIsLoggedIn(!!user.token);
     setUser(user);
     setLoggedInSucceed(true);
-    setTimeout(() => {
-      setLoggedInSucceed(false);
-    }, 3000);
   }, []);
 
   const logout = useCallback(() => {

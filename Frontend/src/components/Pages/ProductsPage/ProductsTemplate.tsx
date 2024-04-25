@@ -1,6 +1,5 @@
 import { useContext, useRef } from "react";
 import { useMutation, useQuery } from "react-query";
-import { Snackbar } from "@mui/material";
 import PreviewCard from "./PreviewCard";
 import {
   ProductItemType,
@@ -13,6 +12,7 @@ import { getAxiosRequest } from "../../../utils/functions";
 import { FavoriteProductType } from "../../Layouts/Drawer/Favorites/Favorites.types";
 import ProductsList from "./ProductsList";
 import classes from "../../../style/Pages/ProductsPage/ProductsTemplate.module.scss";
+import SnackBar from "../../UI/SnackBar";
 
 type ProductsTemplateProps = {
   staticData: ProductsPageStaticDataType;
@@ -81,9 +81,9 @@ const ProductsTemplate: React.FC<ProductsTemplateProps> = ({
         favorites={favorites}
       />
 
-      <Snackbar
+      <SnackBar
         open={isError || addToFavIsError}
-        autoHideDuration={5000}
+        hideDuration={5000}
         message={errorMsg}
       />
     </main>

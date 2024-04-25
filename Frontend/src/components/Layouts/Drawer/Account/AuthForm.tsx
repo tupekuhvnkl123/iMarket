@@ -9,7 +9,7 @@ import { PuffLoader } from "react-spinners";
 type AuthProps = {
   onSubmit: (data: AuthFormValues, isLogin: boolean) => void;
   isLogin: boolean;
-  errorMsg: string;
+  errorMsg: string | unknown;
   isLoading: boolean;
 };
 
@@ -62,7 +62,9 @@ const AuthForm: React.FC<AuthProps> = ({
           <p className={classes.errorMessage}>{formik.errors.password}</p>
         )}
       </div>
-      {errorMsg && <p className={classes.errorMessage}>{errorMsg}</p>}
+      {typeof errorMsg === "string" && (
+        <p className={classes.errorMessage}>{errorMsg}</p>
+      )}
       <button className={classes.authButton} type="submit">
         {isLoading ? (
           <PuffLoader size={20} />

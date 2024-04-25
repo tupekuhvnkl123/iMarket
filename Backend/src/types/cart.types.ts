@@ -1,28 +1,16 @@
 import { Types } from "mongoose";
-import {
-  ProductBrandsType,
-  ProductColorType,
-  ProductOptionType,
-  ProductType,
-} from "./product.type";
 
-// export type CartSchemaType = {
-//   _id: Types.ObjectId;
-//   product: Types.ObjectId;
-//   option: ProductOptionType;
-//   color: ProductColorType;
-// };
-
-export type PopulatedCartType = {
-  _id: Types.ObjectId;
-  product: ProductType;
-  option: ProductOptionType;
-  color: ProductColorType;
-};
-export type CartProductType = {
-  _id: Types.ObjectId;
-  brand: ProductBrandsType;
+export type CartSchemaType = Types.DocumentArray<{
+  productId: Types.ObjectId;
   model: string;
-  option: ProductOptionType;
-  color: ProductColorType;
-};
+  option: { capacity: string; price: number };
+  color: { name: string; hex: string; image: string };
+}>;
+
+export type OrderSchemaType = Types.DocumentArray<{
+  productId: Types.ObjectId;
+  stripeOrderId: string;
+  model: string;
+  option: { capacity: string; price: number };
+  color: { name: string; hex: string; image: string };
+}>;

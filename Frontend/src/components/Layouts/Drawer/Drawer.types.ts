@@ -5,4 +5,5 @@ export enum DrawerValues {
   search = "search",
   navLinks = "navLinks",
   orders = "orders",
+  settings = "settings",
 }

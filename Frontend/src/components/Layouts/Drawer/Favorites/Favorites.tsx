@@ -3,12 +3,12 @@ import classes from "../../../../style/Layouts/Drawer/Favorites/Favorites.module
 import ExploreCard from "../../../UI/ExploreCard";
 import { useMutation, useQuery } from "react-query";
 import { PuffLoader } from "react-spinners";
-import { Snackbar } from "@mui/material";
 import { FavoriteProductType } from "./Favorites.types";
 import { getAxiosRequest, getErrorMsg } from "../../../../utils/functions";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 import axios from "axios";
+import SnackBar from "../../../UI/SnackBar";
 
 const Favorites: React.FC = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -59,9 +59,9 @@ const Favorites: React.FC = () => {
           ))}
       </ul>
 
-      <Snackbar
+      <SnackBar
         open={isError || removeFavIsError}
-        autoHideDuration={5000}
+        hideDuration={5000}
         message={getErrorMsg(error || removeFavError)}
       />
     </>

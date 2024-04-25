@@ -1,13 +1,13 @@
 import ExploreCard from "../../../UI/ExploreCard";
 import OrderItem from "./OrderItem";
 import classes from "../../../../style/Layouts/Drawer/Orders/Orders.module.scss";
-import { Snackbar } from "@mui/material";
 import { PuffLoader } from "react-spinners";
 import { useQuery } from "react-query";
 import { OrderProductType } from "./Orders.types";
 import { getAxiosRequest, getErrorMsg } from "../../../../utils/functions";
 import { useContext } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
+import SnackBar from "../../../UI/SnackBar";
 
 const Orders: React.FC = () => {
   const { isLoggedIn } = useContext(AuthContext);
@@ -27,9 +27,9 @@ const Orders: React.FC = () => {
 
   if (isError) {
     return (
-      <Snackbar
+      <SnackBar
         open={isError}
-        autoHideDuration={5000}
+        hideDuration={5000}
         message={getErrorMsg(error)}
       />
     );

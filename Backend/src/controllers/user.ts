@@ -5,7 +5,6 @@ import { ResJson } from "../types/custom";
 import { FavoriteProductType } from "../types/user.types";
 import { ProductType } from "../types/product.type";
 import { getProductByModel } from "../services/mongoose/product";
-import createHttpError from "http-errors";
 
 export const getFavorites = async (
   req: UserDataRequest,

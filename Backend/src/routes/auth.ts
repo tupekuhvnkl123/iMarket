@@ -3,7 +3,6 @@ import {
   changePassword,
   deleteAccount,
   login,
-  logout,
   register,
 } from "../controllers/auth";
 import {
@@ -22,10 +21,9 @@ router.patch(
   "/change-password",
   changePasswordValidation,
   checkValidations,
-  checkAuth,
+  checkAuth, // @ts-expect-error
   changePassword
-);
+); // @ts-expect-error
 router.delete("/delete-account", checkAuth, deleteAccount);
-// router.post("/logout", logout);
 
 export default router;

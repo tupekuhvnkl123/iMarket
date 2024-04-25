@@ -15,7 +15,8 @@ const HomePage: React.FC = () => {
 
   const productClickHandler = (route: string | undefined) => {
     if (route) {
-      const productRoute = `/${route.toLowerCase()}`;
+      const productRoute = `/${route}`;
+
       navigate(productRoute);
     }
   };

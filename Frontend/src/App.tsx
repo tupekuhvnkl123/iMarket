@@ -5,7 +5,7 @@ import "./style/global/global.scss";
 import { setAxiosDefaults } from "./utils/setAxiosDefaults";
 import { useContext, useLayoutEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
-import SuccessPopout from "./components/UI/SuccessPopout";
+import SnackBar from "./components/UI/SnackBar";
 
 const App: React.FC = () => {
   const { isLoggedIn, loggedInSucceed } = useContext(AuthContext);
@@ -19,7 +19,12 @@ const App: React.FC = () => {
       <Navbar />
       <AppRoutes />
       <Footer />
-      <SuccessPopout open={loggedInSucceed} text="Logged in successfully!" />
+      <SnackBar
+        success
+        open={loggedInSucceed}
+        message="Logged in successfully!"
+        hideDuration={3000}
+      />
     </>
   );
 };

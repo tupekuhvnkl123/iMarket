@@ -1,0 +1,37 @@
+@import "../../../global/index.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  padding: 30px 0;
+  width: 100%;
+  overflow-y: scroll;
+}
+.container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: $backgroundColor;
+  border-radius: 5px;
+}
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+.title {
+  color: $secondary-color;
+  font-size: 18px;
+  font-weight: 450;
+}
+.text {
+  color: rgba($secondary-color, 0.8);
+}
+.deleteBtn {
+  @include button;
+  width: 155px;
+  background-color: rgb(140, 19, 19);
+  color: $secondary-color;
+}

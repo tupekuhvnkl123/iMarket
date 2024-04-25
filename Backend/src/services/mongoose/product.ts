@@ -9,3 +9,27 @@ export const getProductByModel = async (model: string) => {
   }
   return product;
 };
+
+export const getProductsByModel = async (model: string) => {
+  const regexPattern = new RegExp(model, "i");
+  const products: ProductType[] | null = await Product.find(
+    {
+      model: regexPattern,
+    },
+    "model brand"
+  );
+  if (!products) {
+    throw createHttpError.NotFound("Couldn't find products.");
+  }
+  return products;
+};
+
+export const getProductsByIds = async (productIds: string[]) => {
+  const products: ProductType[] | null = await Product.find({
+    _id: { $in: productIds },
+  });
+  if (!products) {
+    throw createHttpError.NotFound("Couldn't find products.");
+  }
+  return products;
+};

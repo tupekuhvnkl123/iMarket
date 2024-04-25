@@ -5,6 +5,7 @@ import { ProductsResponseType } from "./Pages.types";
 import { useQuery } from "react-query";
 import { getAxiosRequest, getErrorMsg, scrollToTop } from "../utils/functions";
 import { ProductItemType } from "../components/Pages/ProductsPage/ProductsPage.types";
+import { useEffect } from "react";
 
 const AirPodsPage: React.FC = () => {
   const fetchData = (): ProductsResponseType =>
@@ -16,7 +17,10 @@ const AirPodsPage: React.FC = () => {
     `${ProductBrandsType.AirPods}-data`,
     fetchData
   );
-  scrollToTop("auto");
+
+  useEffect(() => {
+    scrollToTop("auto");
+  }, []);
 
   return (
     <>

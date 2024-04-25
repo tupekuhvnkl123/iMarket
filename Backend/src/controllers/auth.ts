@@ -90,7 +90,7 @@ export const changePassword = async (
   } catch (error) {
     next(error);
   }
-}; //! Test required
+};
 
 export const deleteAccount = async (
   req: UserDataRequest,
@@ -99,11 +99,9 @@ export const deleteAccount = async (
 ) => {
   try {
     const user = await getUserById(req.userData.userId);
-
     await user.deleteOne();
+    res.status(200).json({ message: "User deleted successfully!" });
   } catch (error) {
     next(error);
   }
-}; //! Test required
-
-// export const logout = async (req: Request, res: Response) => {};
+};

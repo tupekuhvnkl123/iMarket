@@ -8,10 +8,14 @@ import {
   ProductType,
   ProductPageImagesType,
 } from "./ProductPage.types";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import classes from "../../../style/Pages/ProductPage/ProductTemplate.module.scss";
 import { UseMutateFunction } from "react-query";
 import { AddToCartData } from "../../../pages/ProductPage";
+import { scrollToTop } from "../../../utils/functions";
+import { AuthContext } from "../../../context/AuthContext";
+import { DrawerContext } from "../../../context/DrawerContext";
+import { DrawerValues } from "../../Layouts/Drawer/Drawer.types";
 
 type ProductTemplateProps = {
   productData: ProductType;
@@ -26,6 +30,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   productRoute,
   onBuyNow,
 }) => {
+  const { isLoggedIn } = useContext(AuthContext);
+  const { setDrawerContent } = useContext(DrawerContext);
   const { brand, model, colors, information, options } = productData;
   const { background, info, preview, bottom, bubbles } = staticImages;
   const isIMac =
@@ -41,11 +47,16 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   );
 
   const buyNowHandler = () => {
-    onBuyNow({
-      model,
-      colorId: selectedColor._id,
-      optionId: selectedOption._id,
-    });
+    if (isLoggedIn) {
+      onBuyNow({
+        model,
+        colorId: selectedColor._id,
+        optionId: selectedOption._id,
+      });
+    } else {
+      scrollToTop("smooth");
+      setDrawerContent(DrawerValues.account);
+    }
   };
 
   return (

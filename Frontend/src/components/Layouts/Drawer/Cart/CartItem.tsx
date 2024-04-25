@@ -2,14 +2,16 @@ import { CartProductType } from "./Cart.types";
 import { IoMdClose } from "react-icons/io";
 import classes from "../../../../style/Layouts/Drawer/Cart/CartItem.module.scss";
 import { useState } from "react";
+import { UseMutateFunction } from "react-query";
 
 type CartItemProps = {
   product: CartProductType;
+  onRemoveFromCart: UseMutateFunction<void, unknown, string, unknown>;
 };
 
-const CartItem: React.FC<CartItemProps> = ({ product }) => {
+const CartItem: React.FC<CartItemProps> = ({ product, onRemoveFromCart }) => {
   const [showActionsOverlay, setShowActionsOverlay] = useState<boolean>(false);
-  const { color, model, option } = product;
+  const { color, model, option, _id } = product;
 
   const priceText = `${option.price}$ or ${parseFloat(
     (option.price / 12).toFixed(2)
@@ -27,8 +29,12 @@ const CartItem: React.FC<CartItemProps> = ({ product }) => {
             className={classes.closeIcon}
             onClick={cartItemClickHandler}
           />
-          <button className={classes.changeBtn}>Change specs</button>
-          <button className={classes.removeBtn}>Remove from cart</button>
+          <button
+            className={classes.removeBtn}
+            onClick={() => onRemoveFromCart(_id)}
+          >
+            Remove from cart
+          </button>
         </div>
       )}
       <div className={classes.cartItem} onClick={cartItemClickHandler}>
@@ -40,10 +46,12 @@ const CartItem: React.FC<CartItemProps> = ({ product }) => {
             <h1 className={classes.model}>{model}</h1>
             <div className={classes.info}>
               <b>color:</b>
-              <div
-                className={classes.color}
-                style={{ backgroundColor: `#${color.hex}` }}
-              />
+              <div>
+                <div
+                  className={classes.color}
+                  style={{ backgroundColor: `#${color.hex}` }}
+                />
+              </div>
               <p>{color.name}</p>
               <hr />
               <b>{option.capacity}</b>
@@ -56,7 +64,7 @@ const CartItem: React.FC<CartItemProps> = ({ product }) => {
             <p>
               <b>Total:</b> {option.price}$
             </p>
-            <span className={classes.clickNote}>* click to change/remove</span>
+            <span className={classes.clickNote}>* click for remove option</span>
           </div>
         </div>
       </div>

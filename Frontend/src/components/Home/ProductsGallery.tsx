@@ -35,12 +35,12 @@ const ProductsGallery: React.FC<ProductGalleryProps> = ({
             title={iPhone15.title}
             image={iPhone15.image}
             className={classes.iPhone15}
-            onClick={() => onClickProduct(iPhone15.title)}
+            onClick={() => onClickProduct(`iPhone/iPhone-15`)}
           />
         </div>
         <div
           className={classes.airPodsMax}
-          onClick={() => onClickProduct(airPodsMax.route)}
+          onClick={() => onClickProduct("AirPods/AirPods-Max")}
         >
           <span>{airPodsMax.title}</span>
           <img src={airPodsMax.image} alt={airPodsMax.title} />

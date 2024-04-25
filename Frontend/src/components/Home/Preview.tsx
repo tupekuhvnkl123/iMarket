@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { DrawerContext } from "../../context/DrawerContext";
 import classes from "../../style/Home/Preview.module.scss";
 import { DrawerValues } from "../Layouts/Drawer/Drawer.types";
+import { AuthContext } from "../../context/AuthContext";
 
 type PreviewProps = {
   onClickExplore: () => void;
@@ -11,6 +12,7 @@ type PreviewProps = {
 
 const Preview: React.FC<PreviewProps> = ({ onClickExplore }) => {
   const { setDrawerContent } = useContext(DrawerContext);
+  const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <section className={classes.container}>
@@ -26,12 +28,14 @@ const Preview: React.FC<PreviewProps> = ({ onClickExplore }) => {
           and unmatched satisfaction guaranteed.
         </p>
         <div className={classes.buttonContainer}>
-          <button
-            className={classes.signInBtn}
-            onClick={() => setDrawerContent(DrawerValues.account)}
-          >
-            Sign In
-          </button>
+          {!isLoggedIn && (
+            <button
+              className={classes.signInBtn}
+              onClick={() => setDrawerContent(DrawerValues.account)}
+            >
+              Sign In
+            </button>
+          )}
           <button onClick={onClickExplore} className={classes.exploreBtn}>
             Explore
           </button>

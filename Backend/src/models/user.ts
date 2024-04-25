@@ -7,12 +7,20 @@ const colorsSchema = new Schema({
 });
 
 const optionSchema = new Schema({
-  capacity: { type: String, required: true },
+  capacity: { type: String, default: "" },
   price: { type: Number, required: true },
 });
 
 const cartProductSchema = new Schema({
-  product: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+  productId: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+  model: { type: String, required: true },
+  option: { type: optionSchema, required: true },
+  color: { type: colorsSchema, required: true },
+});
+const orderProductSchema = new Schema({
+  productId: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+  stripeOrderId: { type: String, required: true },
+  model: { type: String, required: true },
   option: { type: optionSchema, required: true },
   color: { type: colorsSchema, required: true },
 });
@@ -23,7 +31,7 @@ const userSchema = new Schema(
     password: { type: String, require: true },
     cart: { type: [cartProductSchema], default: [] },
     favorites: [{ type: Schema.Types.ObjectId, ref: "Product", default: [] }],
-    orders: [{ type: [cartProductSchema], ref: "Product", default: [] }],
+    orders: { type: [orderProductSchema], default: [] },
   },
 
   { collection: "Users", timestamps: true }

@@ -5,7 +5,7 @@ import { SetStateType } from "../../../../types/custom.types";
 
 type AuthProps = {
   onSubmit: (data: AuthFormValues, isLogin: boolean) => void;
-  errorMsg: string;
+  errorMsg: string | unknown;
   isLoading: boolean;
   setIsLogin: SetStateType<boolean>;
   isLogin: boolean;

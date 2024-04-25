@@ -5,11 +5,10 @@ import axios from "axios";
 import { useMutation, useQuery } from "react-query";
 import { ProductResponseType } from "./Pages.types";
 import { useNavigate } from "react-router-dom";
-import { Snackbar } from "@mui/material";
 import ProductLoadingSkeleton from "../components/Pages/ProductPage/ProductLoadingSkeleton";
 import { getErrorMsg, scrollToTop } from "../utils/functions";
 import { useEffect } from "react";
-import SuccessPopout from "../components/UI/SuccessPopout";
+import SnackBar from "../components/UI/SnackBar";
 
 export type AddToCartData = {
   model: string;
@@ -63,15 +62,19 @@ const ProductPage: React.FC = () => {
       )}
       {isLoading && <ProductLoadingSkeleton />}
 
-      <Snackbar
-        open={isError || addToCartMutate.isError}
-        autoHideDuration={5000}
+      <SnackBar
+        open={
+          (isError || addToCartMutate.isError) && !addToCartMutate.isSuccess
+        }
+        hideDuration={5000}
         message={getErrorMsg(error || addToCartMutate.error)}
       />
 
-      <SuccessPopout
+      <SnackBar
+        success
         open={addToCartMutate.isSuccess}
-        text={`${model} added to your cart.`}
+        message={`${model?.replace(/-/g, " ")} added to your cart.`}
+        hideDuration={3000}
       />
     </>
   );

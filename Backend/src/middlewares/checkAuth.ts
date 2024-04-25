@@ -1,16 +1,10 @@
 //// Packages
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import createHttpError from "http-errors";
-import { NextFunction, Response } from "express";
-import { UserDataRequest } from "../types/auth.types";
 dotenv.config();
 
-export default async (
-  req: UserDataRequest,
-  res: Response,
-  next: NextFunction
-) => {
+export default async (req: any, res: any, next: any) => {
   try {
     const token = req.headers.authorization;
     if (!token) {

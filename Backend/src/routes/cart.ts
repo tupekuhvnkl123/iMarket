@@ -6,14 +6,17 @@ import {
   getCart,
   getOrders,
   removeFromCart,
+  createOrder,
 } from "../controllers/cart";
 
 const router = express.Router();
 
-router.get("/", checkAuth, getCart);
-router.get("/orders", checkAuth, getOrders);
-router.post("/", checkAuth, addToCart);
-router.delete("/", checkAuth, removeFromCart);
+// @ts-expect-error
+router.get("/", checkAuth, getCart); // @ts-expect-error
+router.get("/orders", checkAuth, getOrders); // @ts-expect-error
+router.post("/create-order", checkAuth, createOrder); // @ts-expect-error
+router.post("/", checkAuth, addToCart); // @ts-expect-error
+router.post("/delete", checkAuth, removeFromCart); // @ts-expect-error
 router.post("/checkout", checkAuth, checkout);
 
 export default router;

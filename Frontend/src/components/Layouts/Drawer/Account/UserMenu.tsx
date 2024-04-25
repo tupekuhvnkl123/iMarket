@@ -1,4 +1,3 @@
-import { AiOutlineUser } from "react-icons/ai";
 import { GoPackage } from "react-icons/go";
 import { MdFavorite } from "react-icons/md";
 import { PiSignOut } from "react-icons/pi";
@@ -7,6 +6,7 @@ import { useContext } from "react";
 import { DrawerContext } from "../../../../context/DrawerContext";
 import { DrawerValues } from "../Drawer.types";
 import { AuthContext } from "../../../../context/AuthContext";
+import { IoMdSettings } from "react-icons/io";
 
 const UserMenu: React.FC = () => {
   const { setDrawerContent } = useContext(DrawerContext);
@@ -30,9 +30,12 @@ const UserMenu: React.FC = () => {
           <MdFavorite className={classes.icon} />
           <p>Favorites</p>
         </li>
-        <li className={classes.navItem}>
-          <AiOutlineUser className={classes.icon} />
-          <p>Account</p>
+        <li
+          className={classes.navItem}
+          onClick={() => setDrawerContent(DrawerValues.settings)}
+        >
+          <IoMdSettings className={classes.icon} />
+          <p>Settings</p>
         </li>
         <li className={classes.navItem} onClick={logout}>
           <PiSignOut className={classes.icon} />

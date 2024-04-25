@@ -1,6 +1,7 @@
 import { Request } from "express";
-import { Types } from "mongoose";
+import { ObjectId, Types } from "mongoose";
 import { ReqBody } from "./custom";
+import { CartSchemaType, OrderSchemaType } from "./cart.types";
 
 export type UserDataRequest<T = any> = Request<any, any, T> & {
   userData: {
@@ -21,3 +22,12 @@ export type LoginRes = {
 
 export type ChangePasswordRequest = ReqBody<{ password: string }> &
   UserDataRequest;
+
+export type UserType = {
+  _id: Types.ObjectId;
+  email: string;
+  password: string;
+  cart: CartSchemaType;
+  favorites: ObjectId[];
+  orders: OrderSchemaType;
+};

@@ -1,0 +1,27 @@
+@import "../../../global/index.scss";
+
+.modal {
+  @include flexCenter;
+}
+.content {
+  @include flexCenter;
+  background-color: $secondary-color;
+  flex-direction: column;
+  row-gap: 30px;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 90vw;
+}
+.buttonsContainer {
+  @include flexCenter;
+  column-gap: 20px;
+  .confirmBtn {
+    @include button("dark");
+  }
+  .cancelBtn {
+    @include button;
+
+    background-color: rgb(140, 19, 19);
+    color: $secondary-color;
+  }
+}

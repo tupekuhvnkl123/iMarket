@@ -4,7 +4,8 @@ import checkAuth from "../middlewares/checkAuth";
 
 const router = express.Router();
 
-router.get("/favorites", checkAuth, getFavorites);
+// @ts-expect-error
+router.get("/favorites", checkAuth, getFavorites); // @ts-expect-error
 router.post("/addToFavorite", checkAuth, addToFavorites);
 
 export default router;

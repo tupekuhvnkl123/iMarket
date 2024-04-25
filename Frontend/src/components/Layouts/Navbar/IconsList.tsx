@@ -1,6 +1,5 @@
 import { AiOutlineUser } from "react-icons/ai";
 import { IoIosSearch } from "react-icons/io";
-import { LuHeart } from "react-icons/lu";
 import { PiShoppingCartSimple } from "react-icons/pi";
 import Burger from "../../UI/Burger";
 import { DrawerValues } from "../Drawer/Drawer.types";

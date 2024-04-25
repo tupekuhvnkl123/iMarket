@@ -27,3 +27,40 @@
 .input:focus {
   outline: none;
 }
+
+.searchResultList {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  row-gap: 15px;
+  overflow-y: scroll;
+}
+.searchResultList::-webkit-scrollbar {
+  width: 5px;
+}
+
+.searchResultList::-webkit-scrollbar-thumb {
+  background-color: $backgroundColor;
+  border-radius: 5px;
+}
+.searchResultItem {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  column-gap: 10px;
+  color: rgb($secondary-color, 0.8);
+  transition: all 0.1s ease-in-out;
+
+  .icon {
+    font-size: 22px;
+  }
+  p {
+    font-size: 15px;
+  }
+}
+.searchResultItem:hover {
+  background-color: $secondary-color;
+  color: rgb($primary-color, 0.8);
+  font-weight: 500;
+}

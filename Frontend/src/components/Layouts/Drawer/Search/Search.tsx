@@ -1,12 +1,17 @@
 import { IoIosSearch } from "react-icons/io";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import classes from "../../../../style/Layouts/Drawer/Search/Search.module.scss";
 import { getAxiosRequest, getErrorMsg } from "../../../../utils/functions";
 import { useQuery } from "react-query";
 import SnackBar from "../../../UI/SnackBar";
 import { SearchItemType } from "./Search.types";
+import { IoIosArrowRoundForward } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { DrawerContext } from "../../../../context/DrawerContext";
 
 const Search: React.FC = () => {
+  const navigate = useNavigate();
+  const { closeDrawer } = useContext(DrawerContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const [searchValue, setSearchValue] = useState<string>("");
   const [search, setSearch] = useState<boolean>(false);
@@ -55,9 +60,17 @@ const Search: React.FC = () => {
           />
         </div>
 
-        <ul>
+        <ul className={classes.searchResultList}>
           {data?.products.map((product) => (
-            <div key={product._id}>
+            <div
+              key={product._id}
+              className={classes.searchResultItem}
+              onClick={() => {
+                navigate(`${product.brand}/${product.model}`);
+                closeDrawer();
+              }}
+            >
+              <IoIosArrowRoundForward className={classes.icon} />
               <p>{product.model}</p>
             </div>
           ))}

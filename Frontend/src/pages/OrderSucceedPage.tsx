@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useQuery } from "react-query";
-import { getErrorMsg } from "../utils/functions";
+import { getErrorMsg, scrollToTop } from "../utils/functions";
 import CheckMarkLoader from "../components/UI/CheckMarkLoader";
 import classes from "../style/Pages/OrderSucceedPage.module.scss";
 import { useNavigate } from "react-router-dom";
@@ -63,7 +63,10 @@ const OrderSucceedPage: React.FC = () => {
           {isSuccess && (
             <button
               className={classes.ordersBtn}
-              onClick={() => setDrawerContent(DrawerValues.orders)}
+              onClick={() => {
+                scrollToTop("auto");
+                setDrawerContent(DrawerValues.orders);
+              }}
             >
               Orders
             </button>

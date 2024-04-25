@@ -9,7 +9,7 @@ export const fadeInAnimation: MotionProps = {
 
 export const slideAnimation = (side: "left" | "right"): MotionProps => {
   return {
-    initial: { x: side === "left" ? 400 : -400, opacity: 0 },
+    initial: { x: side === "left" ? 250 : -250, opacity: 0 },
     whileInView: { x: 0, opacity: 1 },
     transition: { duration: 1, ease: "easeInOut", delay: 0.1 },
     viewport: { once: true },

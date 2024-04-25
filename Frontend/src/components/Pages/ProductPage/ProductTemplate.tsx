@@ -36,8 +36,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   const { background, info, preview, bottom, bubbles } = staticImages;
   const isIMac =
     productRoute === "iMac" ||
-    productRoute === "iMac Pro" ||
-    productRoute === "Mac Studio";
+    productRoute === "iMac-Pro" ||
+    productRoute === "Mac-Studio";
 
   const [selectedColor, setSelectedColor] = useState<ProductColorType>(
     colors[0]
